@@ -1,8 +1,8 @@
 import heroVideo from '../assets/Video_Generation_of_Glass_Building.mp4';
 import whoWeAreVideo from '../assets/6561844-uhd_3840_2160_25fps.mp4';
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useAnimationFrame, type Variants, AnimatePresence } from 'framer-motion';
-import { ArrowRight, TrendingUp, ShieldCheck, Smartphone, Globe, Plus, Minus, BadgeIndianRupee, ArrowUpRight } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValue, useAnimationFrame, type Variants } from 'framer-motion';
+import { ArrowRight, TrendingUp, ShieldCheck, Smartphone, Globe, BadgeIndianRupee, ArrowUpRight } from 'lucide-react';
 import { siteContent } from '../data/content';
 import { Link } from 'react-router-dom';
 
@@ -87,7 +87,7 @@ function Marquee() {
         }
     }, []);
 
-    useAnimationFrame((time, delta) => {
+    useAnimationFrame((_, delta) => {
         if (!isDragging && !isHovered && width > 0) {
             const moveBy = (delta / 1000) * 50; // Speed: 50px per second
             let newX = x.get() - moveBy;
@@ -183,31 +183,7 @@ function FloatingParticles() {
     );
 }
 
-// FAQ Accordion
-function FAQItem({ question, answer, isOpen, toggle }: { question: string; answer: string; isOpen: boolean; toggle: () => void }) {
-    return (
-        <div className="border-b border-white/10 last:border-0">
-            <button onClick={toggle} className="flex items-center justify-between w-full py-6 text-left group">
-                <span className="text-lg font-bold text-white group-hover:text-primary-glow transition-colors">{question}</span>
-                <div className={`p-2 rounded-full border border-white/10 transition-colors ${isOpen ? 'bg-primary text-white' : 'text-slate-400'}`}>
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                </div>
-            </button>
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden"
-                    >
-                        <p className="text-slate-400 pb-6 leading-relaxed">{answer}</p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-}
+
 
 
 // Seamless Loop Video Component
@@ -294,7 +270,7 @@ export default function Home() {
 
     const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
     const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
 
     const iconMap: any = {
         "ShieldCheck": <ShieldCheck className="w-10 h-10" />,

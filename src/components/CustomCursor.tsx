@@ -5,7 +5,7 @@ export default function CustomCursor() {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
     const [isPointer, setIsPointer] = useState(false);
-    const [isExternalLink, setIsExternalLink] = useState(false);
+
 
     // Spring configs
     const springConfigRing = { damping: 25, stiffness: 400, mass: 0.5 }; // Lagging ring
@@ -34,9 +34,7 @@ export default function CustomCursor() {
 
             setIsPointer(isClickable);
 
-            // Check for external links to potentially show an arrow icon (optional enhancement)
-            const link = target.closest('a');
-            setIsExternalLink(link?.getAttribute('target') === '_blank');
+
         };
 
         window.addEventListener('mousemove', moveCursor);
