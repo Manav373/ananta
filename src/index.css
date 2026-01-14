@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-text-primary antialiased overflow-x-hidden;
+    cursor: none;
+    /* Custom cursor implementation */
+  }
+
+  /* Custom Selection Color */
+  ::selection {
+    @apply bg-primary-glow/30 text-white;
+  }
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-surfaceHighlight rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-glow;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.glass-card {
+  @apply bg-surface/50 backdrop-blur-md border border-white/5 hover:border-primary-glow/50 transition-all duration-500;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-200 to-blue-400;
+}
