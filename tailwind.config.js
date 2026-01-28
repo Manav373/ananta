@@ -7,55 +7,74 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep Space Dark Theme
-        background: '#020617', // Slate 950
-        surface: '#0f172a',    // Slate 900
-        surfaceHighlight: '#1e293b', // Slate 800
+        // Modern Fintech Theme
+        background: '#0B0F19', // Deep Navy
+        surface: '#111827',    // Gray 900
+        surfaceHighlight: '#1F2937', // Gray 800
 
-        // Neon Accents
+        // Professional Accents
         primary: {
-          DEFAULT: '#3b82f6', // Blue 500
-          glow: '#60a5fa',    // Blue 400
-          dark: '#1d4ed8',    // Blue 700
+          DEFAULT: '#2563EB', // Royal Blue
+          dark: '#1E40AF',    // Darker Blue
+          light: '#60A5FA',   // Light Blue
+        },
+        secondary: {
+          DEFAULT: '#10B981', // Emerald (Growth)
+          dark: '#059669',
         },
         accent: {
-          cyan: '#06b6d4',    // Cyan 500
-          violet: '#8b5cf6',  // Violet 500
-          rose: '#f43f5e',    // Rose 500
+          slate: '#64748B',
+          gold: '#F59E0B',    // Subtle localized accents
+        },
+        'primary-glow': '#3B82F6',
+        neon: {
+          cyan: '#22d3ee',
         },
 
         // Text
         text: {
-          primary: '#f8fafc', // Slate 50
-          secondary: '#94a3b8', // Slate 400
-          tertiary: '#64748b', // Slate 500
+          primary: '#F9FAFB', // Gray 50
+          secondary: '#9CA3AF', // Gray 400
+          tertiary: '#6B7280', // Gray 500
         }
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-        display: ['"Outfit"', 'sans-serif'],
-      },
-      animation: {
-        'aurora': 'aurora 20s linear infinite',
-        'slow-spin': 'spin 20s linear infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      },
-      keyframes: {
-        aurora: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
+        display: ['"Plus Jakarta Sans"', 'sans-serif'], // Unify fonts for clean look
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg)',
-      }
+        'hero-gradient': 'linear-gradient(135deg, #0B0F19 0%, #111827 100%)',
+        'blue-glow': 'radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, transparent 70%)',
+      },
+      boxShadow: {
+        'soft-blue': '0 4px 20px -2px rgba(37, 99, 235, 0.2)',
+        'card': '0 0 0 1px rgba(255,255,255,0.05), 0 4px 6px -1px rgba(0,0,0,0.1)',
+      },
+      animation: {
+        'grain': 'grain 8s steps(10) infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+      },
+      keyframes: {
+        grain: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '10%': { transform: 'translate(-5%, -10%)' },
+          '20%': { transform: 'translate(-15%, 5%)' },
+          '30%': { transform: 'translate(7%, -25%)' },
+          '40%': { transform: 'translate(-5%, 25%)' },
+          '50%': { transform: 'translate(-15%, 10%)' },
+          '60%': { transform: 'translate(15%, 0%)' },
+          '70%': { transform: 'translate(0%, 15%)' },
+          '80%': { transform: 'translate(3%, 35%)' },
+          '90%': { transform: 'translate(-10%, 10%)' },
+        },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
+      },
     },
   },
   plugins: [],

@@ -1,343 +1,262 @@
 
-import { useState, useEffect } from 'react';
-import { motion, type Variants, AnimatePresence } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { siteContent } from '../data/content';
-import { CheckCircle, Award, TrendingUp, Users, Linkedin, Mail } from 'lucide-react';
+import { Award, Linkedin, Mail, Calendar, Shield, Globe, Zap, Instagram } from 'lucide-react';
 
-const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+// Staggered Blur Effect Variants
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2
+        }
+    }
 };
 
+const wordVariants: Variants = {
+    hidden: {
+        opacity: 0,
+        y: 20,
+        filter: 'blur(10px)'
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        transition: {
+            duration: 0.8,
+            ease: [0.2, 0.65, 0.3, 0.9] // Custom elegant easing
+        }
+    }
+};
+
+const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const timelineData = [
+    { year: "2023", title: "Inception", description: "Anantaa Consultancy was born with a vision to bridge the gap between traditional banking and the unbanked sector." },
+    { year: "2024", title: "Market Penetration", description: "Established a robust network of 100+ CSPs across Tier-2 cities, generating over ₹50M in transaction volume." },
+    { year: "2025", title: "Digital Expansion", description: " Launching our proprietary digital platform and expanding services to include deeper financial advisory." },
+    { year: "Future", title: "National Dominance", description: "Aiming for a pan-India presence, empowering 10,000+ micro-entrepreneurs." }
+];
+
+const features = [
+    { icon: Shield, title: "Unwavering Trust", desc: "SEBI compliant processes and transparent reporting." },
+    { icon: Zap, title: "Rapid Execution", desc: "Setting up KIOSK banking points in record time." },
+    { icon: Globe, title: "Deep Reach", desc: "Penetrating the most remote corners of the market." }
+];
+
 export default function About() {
-    const [step, setStep] = useState(0);
-    const valuesList = siteContent.about.values.list;
-    const totalValues = valuesList.length;
-    const activeIndex = step % totalValues;
-
-    // Auto-rotate steps
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setStep((prev) => prev + 1);
-        }, 2000);
-        return () => clearInterval(interval);
-    }, []);
-
     return (
-        <div className="pt-32 min-h-screen bg-background text-white">
-            {/* Header */}
-            <section className="relative pb-20 overflow-hidden">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[128px] pointer-events-none" />
+        <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden selection:bg-blue-500/30">
 
-                <div className="container mx-auto px-6 relative z-10">
-                    <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        variants={fadeInUp}
-                        className="max-w-4xl"
-                    >
-                        <span className="text-primary-glow font-bold tracking-widest uppercase text-sm mb-4 block">About Us</span>
-                        <h1 className="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight">
-                            Architecting the <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500">Financial Future</span>.
-                        </h1>
-                        <p className="text-xl text-slate-400 max-w-2xl leading-relaxed">
-                            We are not just consultants; we are strategic partners committed to bridging the gap between complex financial systems and end-users.
-                        </p>
-                    </motion.div>
+            {/* Optimized CSS Background Animation (REMOVED JS PARTICLES) */}
+            <div className="fixed inset-0 z-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
+                <div className="absolute inset-0 overflow-hidden">
+                    <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[80px] animate-blob" />
+                    <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[80px] animate-blob animation-delay-2000" />
+                    <div className="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] bg-cyan-600/20 rounded-full blur-[80px] animate-blob animation-delay-4000" />
                 </div>
-            </section>
+                <div className="absolute inset-0 opacity-[0.15]" style={{
+                    backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
+                    backgroundSize: '60px 60px',
+                    maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
+                }}></div>
+            </div>
 
-            {/* Main Content */}
-            <section className="py-20">
-                <div className="container mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: false }}
-                            className="relative group"
+            <div className="relative z-10 pt-20">
+                {/* --- HERO SECTION --- */}
+                <section className="relative py-24 lg:py-32">
+                    <div className="container mx-auto px-6 text-center">
+                        <motion.span
+                            initial="hidden" animate="visible" variants={fadeInUp}
+                            className="inline-block py-2 px-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-blue-300 text-xs font-bold tracking-widest uppercase mb-6 shadow-glow"
                         >
-                            {/* Card Background with Glassmorphism */}
-                            <div className="relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 p-6 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/10 group-hover:border-primary/30">
+                            Who We Are
+                        </motion.span>
 
-                                {/* Image Container */}
-                                <div className="relative mb-8 overflow-hidden rounded-2xl aspect-[4/5]">
-                                    {/* Floating Founder Label */}
-                                    <div className="absolute top-8 left-8 z-30 flex items-center gap-3">
-                                        <div className="relative">
-                                            <div className="w-3 h-3 rounded-full bg-primary shadow-[0_0_15px_rgba(79,70,229,0.8)] z-10 relative" />
-                                            <div className="absolute inset-0 rounded-full bg-primary/50 animate-ping" />
+                        {/* STAGGERED BLUR REVEAL TITLE */}
+                        <motion.h1
+                            initial="hidden"
+                            animate="visible"
+                            variants={containerVariants}
+                            className="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight max-w-5xl mx-auto drop-shadow-2xl flex flex-wrap justify-center gap-x-4 gap-y-2"
+                        >
+                            <motion.span variants={wordVariants}>Architecting</motion.span>
+                            <motion.span variants={wordVariants}>the</motion.span>
+                            <span className="relative inline-flex overflow-hidden">
+                                <motion.span
+                                    variants={wordVariants}
+                                    className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 pb-2"
+                                >
+                                    Financial Future
+                                </motion.span>
+                            </span>
+                            <motion.span variants={wordVariants}>of</motion.span>
+                            <motion.span variants={wordVariants}>India.</motion.span>
+                        </motion.h1>
+
+                        <motion.p
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 1 }}
+                            className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed"
+                        >
+                            We are more than consultants. We are the architects of financial inclusion, building the infrastructure that powers the next billion transactions.
+                        </motion.p>
+                    </div>
+                </section>
+
+                {/* --- MISSION STATEMENT --- */}
+                <section className="py-20">
+                    <div className="container mx-auto px-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                            <motion.div
+                                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+                                className="space-y-6"
+                            >
+                                <h2 className="text-3xl font-display font-bold text-white">Bridging the Gap</h2>
+                                <p className="text-slate-300 text-lg leading-relaxed">
+                                    {siteContent.about.description}
+                                </p>
+                                <p className="text-slate-300 text-lg leading-relaxed">
+                                    Our mission is simple but ambitious: to make banking accessible to every citizen, regardless of their location. By empowering local entrepreneurs to become Customer Service Points (CSPs), we create a decentralized banking network that serves the community at the grassroots level.
+                                </p>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+                                className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 group"
+                            >
+                                <div className="absolute inset-0 bg-blue-500/20 mix-blend-overlay z-10" />
+                                <img
+                                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070"
+                                    alt="Modern Corporate Architecture"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* --- TIMELINE SECTION --- */}
+                <section className="py-24 relative">
+                    <div className="container mx-auto px-6 max-w-4xl">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl font-bold mb-4">Our Journey</h2>
+                            <div className="h-1 w-20 bg-blue-500 mx-auto rounded-full shadow-[0_0_10px_#3b82f6]" />
+                        </div>
+
+                        <div className="space-y-12 relative">
+                            {/* Connecting Line */}
+                            <div className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2" />
+
+                            {timelineData.map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                                >
+                                    {/* GLASS CARD */}
+                                    <div className="ml-12 md:ml-0 md:w-1/2 bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 shadow-lg group">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <Calendar className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                                            <span className="text-blue-400 font-bold tracking-widest text-sm shadow-blue-500/50 drop-shadow-sm">{item.year}</span>
                                         </div>
-                                        <span className="text-white/90 text-sm font-bold tracking-[0.2em] uppercase font-display backdrop-blur-md bg-black/30 px-3 py-1 rounded-full border border-white/10">Founder</span>
+                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-100 transition-colors">{item.title}</h3>
+                                        <p className="text-slate-300 text-sm leading-relaxed">{item.description}</p>
                                     </div>
 
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 z-10" />
+                                    {/* Center Dot */}
+                                    <div className="absolute left-[20px] md:left-1/2 top-8 -translate-x-1/2 w-4 h-4 bg-slate-950 border-4 border-blue-500 rounded-full z-10 shadow-[0_0_15px_#3b82f6]" />
+
+                                    {/* Empty Spacer */}
+                                    <div className="hidden md:block md:w-1/2" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* --- FOUNDER SECTION (GLASS) --- */}
+                <section className="py-24">
+                    <div className="container mx-auto px-6">
+                        <div className="max-w-5xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl relative hover:border-blue-500/20 transition-colors duration-500">
+                            {/* Founder Background Glow */}
+                            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" />
+
+                            <div className="grid grid-cols-1 md:grid-cols-2">
+                                <div className="relative h-[400px] md:h-full group overflow-hidden first:rounded-t-3xl md:first:rounded-l-3xl md:first:rounded-tr-none">
                                     <img
                                         src={siteContent.about.founder.image}
                                         alt={siteContent.about.founder.name}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
-
-                                    {/* Founder Tag */}
-                                    <div className="absolute bottom-4 right-4 z-20 bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
-                                        <Award className="w-3 h-3 text-primary-glow" />
-                                        <span className="text-xs font-bold uppercase tracking-wider text-white">Founder</span>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent opacity-90" />
+                                    <div className="absolute bottom-8 left-8">
+                                        <h3 className="text-3xl font-bold text-white mb-1">{siteContent.about.founder.name}</h3>
+                                        <p className="text-blue-400 font-medium tracking-wide">{siteContent.about.founder.role}</p>
                                     </div>
                                 </div>
-
-                                {/* Founder Details */}
-                                <div>
-                                    <h3 className="text-3xl font-display font-bold text-white mb-1">
-                                        {siteContent.about.founder.name}
-                                    </h3>
-                                    <p className="text-primary-glow font-medium uppercase tracking-widest text-sm mb-6">
-                                        {siteContent.about.founder.role}
-                                    </p>
-
-                                    <p className="text-slate-300 italic leading-relaxed mb-8 border-l-2 border-primary/50 pl-4">
+                                <div className="p-10 md:p-16 flex flex-col justify-center relative z-10">
+                                    <Award className="w-12 h-12 text-blue-500 mb-8 drop-shadow-lg" />
+                                    <h3 className="text-2xl font-display font-bold text-white mb-6">Leadership Vision</h3>
+                                    <p className="text-slate-300 leading-relaxed italic mb-10 border-l-4 border-blue-500 pl-6 py-2">
                                         "{siteContent.about.founder.bio}"
                                     </p>
-
-                                    {/* Social Links */}
-                                    <div className="flex gap-4">
-                                        <a href={siteContent.about.founder.socials.linkedin} className="p-3 rounded-full bg-white/5 text-slate-400 hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
-                                            <Linkedin className="w-5 h-5" />
+                                    <div className="flex flex-wrap gap-3">
+                                        <a href={siteContent.about.founder.socials.linkedin} className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 rounded-xl text-white font-medium transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 transform hover:-translate-y-1">
+                                            <Linkedin className="w-5 h-5" /> Connect
                                         </a>
-                                        <a href={siteContent.about.founder.socials.email} className="p-3 rounded-full bg-white/5 text-slate-400 hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
-                                            <Mail className="w-5 h-5" />
+                                        <a href={siteContent.about.founder.socials.instagram} className="flex items-center gap-2 px-5 py-3 bg-pink-600 hover:bg-pink-700 rounded-xl text-white font-medium transition-all shadow-lg shadow-pink-600/20 hover:shadow-pink-600/40 transform hover:-translate-y-1">
+                                            <Instagram className="w-5 h-5" /> Instagram
+                                        </a>
+                                        <a href={siteContent.about.founder.socials.email} className="flex items-center gap-2 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white font-medium transition-all transform hover:-translate-y-1">
+                                            <Mail className="w-5 h-5" /> Contact
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: false }}
-                            className="space-y-12"
-                        >
-                            <div>
-                                <h2 className="text-3xl font-bold text-white mb-6">Who We Are</h2>
-                                <p className="text-slate-400 text-lg leading-relaxed mb-6">
-                                    {siteContent.about.description}
-                                </p>
-                                <p className="text-slate-400 text-lg leading-relaxed">
-                                    Founded in 2024, Anantaa Consultancy has rapidly evolved into a premier fintech distribution powerhouse. We specialize in providing robust infrastructure for KIOSK banking, enabling financial inclusion in underserved areas.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                {[
-                                    "Proven Track Record",
-                                    "Expert Consultation",
-                                    "24/7 Support",
-                                    "Innovative Tech"
-                                ].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-4 group">
-                                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-primary-glow group-hover:bg-primary group-hover:text-white transition-all">
-                                            <CheckCircle className="w-5 h-5" />
-                                        </div>
-                                        <span className="text-slate-300 font-medium">{item}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* --- OUR VALUES (Rotating Bubble) --- */}
-            <section className="py-32 bg-slate-950 relative overflow-hidden">
-                {/* Background Glows */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-
-                        {/* Left: Text Description */}
-                        <div>
-                            <motion.h2
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: false }}
-                                variants={fadeInUp}
-                                className="text-4xl md:text-5xl font-display font-bold text-white mb-6"
-                            >
-                                {siteContent.about.values.title}
-                            </motion.h2>
-                            <motion.p
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: false }}
-                                variants={fadeInUp}
-                                className="text-slate-400 text-lg leading-relaxed mb-12"
-                            >
-                                {siteContent.about.values.description}
-                            </motion.p>
-
-                            {/* Value Description (Dynamic) */}
-                            <div className="h-24">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={activeIndex}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="text-2xl text-primary-glow font-light italic"
-                                    >
-                                        "{valuesList[activeIndex]} is at the core of everything we do."
-                                    </motion.div>
-                                </AnimatePresence>
-                            </div>
+                {/* --- WHY US (GLASS CARDS) --- */}
+                <section className="py-24 pb-32">
+                    <div className="container mx-auto px-6">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl font-bold mb-4">Why Partner With Us?</h2>
+                            <p className="text-slate-400">The Anantaa Advantage</p>
                         </div>
 
-                        {/* Right: Planetary Ring Visualization */}
-                        <div className="relative h-[600px] flex items-center justify-center -mr-20 lg:-mr-32">
-
-                            {/* Main Ring Container */}
-                            <div className="relative w-[500px] h-[500px] flex items-center justify-center">
-
-                                {/* Trail Ring Layer */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {features.map((feat, i) => (
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: false }}
-                                    transition={{ duration: 1 }}
-                                    className="relative w-full h-full flex items-center justify-center"
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="bg-white/5 backdrop-blur-md p-10 rounded-3xl border border-white/10 hover:bg-white/10 hover:border-blue-500/40 transition-all duration-300 group hover:-translate-y-2 relative overflow-hidden"
                                 >
-                                    {/* Static Orbit Ring */}
-                                    <div className="absolute inset-0 rounded-full border border-white/5" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                    {/* Inner Decorative Ring */}
-                                    <div className="absolute inset-12 rounded-full border border-white/5 border-dashed opacity-30" />
-
-                                    {/* Active Rotating Trail */}
-                                    <motion.div
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                                        className="absolute inset-0 rounded-full"
-                                    >
-                                        <div
-                                            className="absolute inset-0 rounded-full"
-                                            style={{
-                                                background: 'conic-gradient(from 0deg, transparent 0%, transparent 60%, rgba(56, 189, 248, 0.1) 80%, rgba(255, 255, 255, 0.8) 100%)',
-                                                maskImage: 'radial-gradient(transparent 68%, black 69%, black 71%, transparent 72%)',
-                                                WebkitMaskImage: 'radial-gradient(transparent 68%, black 69%, black 71%, transparent 72%)'
-                                            }}
-                                        />
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[1px] w-2 h-2 bg-white rounded-full shadow-[0_0_15px_white]" />
-                                    </motion.div>
-
-                                    {/* Central Core Glow */}
-                                    <div className="absolute inset-0 bg-primary/10 blur-[80px] rounded-full" />
-                                    <div className="absolute w-32 h-32 rounded-full bg-gradient-to-tr from-primary/20 to-transparent blur-xl" />
+                                    <div className="w-14 h-14 rounded-2xl bg-blue-900/40 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:text-white group-hover:bg-blue-500 group-hover:scale-110 transition-all duration-300 mb-8 relative z-10 shadow-lg">
+                                        <feat.icon className="w-7 h-7" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-4 relative z-10">{feat.title}</h3>
+                                    <p className="text-slate-400 leading-relaxed relative z-10">{feat.desc}</p>
                                 </motion.div>
-
-                                {/* Planetary Values (Distributed around circle) */}
-                                <div className="absolute inset-0 pointer-events-none">
-                                    {valuesList.map((value, i) => {
-                                        const isActive = i === activeIndex;
-
-                                        // Distribute in a circle starting from -90deg (Top)
-                                        const angleDeg = (360 / totalValues) * i - 90;
-                                        const radian = (angleDeg * Math.PI) / 180;
-                                        const radius = 250; // On the border of the 500px ring
-
-                                        const x = Math.cos(radian) * radius;
-                                        const y = Math.sin(radian) * radius;
-
-                                        // Determine Text Alignment relative to center
-                                        const isRight = x > 10;
-                                        const isLeft = x < -10;
-                                        const alignClass = isRight ? "text-left items-start flex-row" : (isLeft ? "text-right items-end flex-row-reverse" : "text-center items-center flex-col");
-
-                                        // Offset text further outward for clear "outer" placement
-                                        const textX = Math.cos(radian) * (radius + 60);
-                                        const textY = Math.sin(radian) * (radius + 60);
-
-                                        return (
-                                            <div key={i}>
-                                                {/* Cursor-Style Dot on Ring */}
-                                                <motion.div
-                                                    className="absolute top-1/2 left-1/2 z-10 flex items-center justify-center"
-                                                    style={{
-                                                        x,
-                                                        y,
-                                                        translateX: "-50%",
-                                                        translateY: "-50%"
-                                                    }}
-                                                >
-                                                    {/* Outer Ring Effect (Like Cursor) */}
-                                                    <motion.div
-                                                        animate={{
-                                                            scale: isActive ? 1.5 : 0,
-                                                            opacity: isActive ? 1 : 0
-                                                        }}
-                                                        className="absolute w-8 h-8 rounded-full border border-primary/50"
-                                                    />
-
-                                                    {/* Central Dot */}
-                                                    <motion.div
-                                                        animate={{
-                                                            scale: isActive ? 1 : 0.8,
-                                                            backgroundColor: isActive ? "#38bdf8" : "#94a3b8"
-                                                        }}
-                                                        className="w-2 h-2 rounded-full shadow-[0_0_10px_rgba(56,189,248,0.5)]"
-                                                    />
-                                                </motion.div>
-
-                                                {/* Label */}
-                                                <motion.div
-                                                    className={`absolute top-1/2 left-1/2 flex gap-4 ${alignClass}`}
-                                                    style={{
-                                                        x: textX,
-                                                        y: textY,
-                                                        translateX: "-50%",
-                                                        translateY: "-50%"
-                                                    }}
-                                                    animate={{ opacity: isActive ? 1 : 0.3, scale: isActive ? 1.1 : 1 }}
-                                                >
-                                                    <span className={`text-xl font-display tracking-wider whitespace-nowrap ${isActive ? 'text-white font-bold text-shadow-glow' : 'text-slate-500'}`}>
-                                                        {value}
-                                                    </span>
-                                                </motion.div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* Stats */}
-            <section className="py-32 relative overflow-hidden">
-                <div className="absolute inset-0 bg-surfaceHighlight/30 skew-y-3 scale-110" />
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        {siteContent.stats.map((stat, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: false }}
-                                transition={{ delay: index * 0.2 }}
-                                className="text-center group"
-                            >
-                                <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/5 mb-6 group-hover:bg-primary/20 transition-all duration-500">
-                                    {index === 0 && <Award className="w-10 h-10 text-white" />}
-                                    {index === 1 && <Users className="w-10 h-10 text-white" />}
-                                    {index === 2 && <TrendingUp className="w-10 h-10 text-white" />}
-                                </div>
-                                <div className="text-6xl font-display font-bold text-white mb-2">{stat.value}</div>
-                                <div className="text-primary-glow font-medium tracking-widest uppercase text-sm">{stat.label}</div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     );
 }

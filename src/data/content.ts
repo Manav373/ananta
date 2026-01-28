@@ -13,7 +13,7 @@ export const siteContent = {
         logo: "https://static.wixstatic.com/media/9eb0df_e2e6e623b52f480c8da1cb19fe47ce98~mv2.png",
         contact: {
             email: "bhavik@anantaaconsultancy.com",
-            phone: "+91 82382 17937",
+            phone: "+91 94094 08199",
             address: "India",
         },
         socials: {
@@ -50,9 +50,10 @@ export const siteContent = {
             bio: "As the Founder of Ananta Fintech, I lead the company's vision, partnerships, and growth strategy while ensuring transparent and compliant fintech distribution through authorized platforms.",
             image: "https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg",
             socials: {
-                linkedin: "#",
+                linkedin: "https://www.linkedin.com/in/bhavik-panchal-b04a2b219/",
                 twitter: "#",
-                email: "mailto:bhavik@anantaaconsultancy.com"
+                email: "mailto:bhavik@anantaaconsultancy.com",
+                instagram: "https://www.instagram.com/bhavik_8199"
             }
         },
         values: {
@@ -62,16 +63,33 @@ export const siteContent = {
         },
     },
     industries: [
-        "KIOSK Banking Centers",
-        "Payment Gateway Services",
-        "Finance & Loan Services",
-        "Domestic Money Transfer",
-        "New ATM Installation"
+        { name: "KIOSK Banking Centers", image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop" },
+        { name: "Payment Gateway Services", image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=2070&auto=format&fit=crop" },
+        { name: "Finance & Loan Services", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2070&auto=format&fit=crop" },
+        { name: "Domestic Money Transfer", image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=2070&auto=format&fit=crop" },
+        { name: "New ATM Installation", image: "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?q=80&w=2070&auto=format&fit=crop" }
+    ],
+    process: [
+        {
+            step: "01",
+            title: "Consultation",
+            description: "We analyze your requirements and identify the best financial solutions for your business goals."
+        },
+        {
+            step: "02",
+            title: "Strategy & Setup",
+            description: "Our experts design a tailored roadmap and handle all technical and operational setups."
+        },
+        {
+            step: "03",
+            title: "Launch & Support",
+            description: "Go live with confidence. We provide continuous support and real-time monitoring to ensure success."
+        }
     ],
     detailedSolutions: [
         {
             title: "Risk Management",
-            description: "We at Ananta Consultancy provide customer service centers for various banks. By opening these centers, individuals can earn a good income responsibly while also delivering excellent service to customers. We at Ananta Consultancy provide customer service centers for various banks. By opening these centers, individuals can earn a good income responsibly while also delivering excellent service to customers.",
+            description: "We at Ananta Consultancy provide customer service centers for various banks. By opening these centers, individuals can earn a good income responsibly while also delivering excellent service to customers.",
             icon: "ShieldCheck"
         },
         {
@@ -97,7 +115,7 @@ export const siteContent = {
     ],
     insights: {
         title: "Stay Ahead With Expert Knowledge",
-        subtitle: "This is the space to introduce visitors to the business or brand. Briefly explain who's behind it, what it does and what makes it unique. Share its core values and what this site has to offer.",
+        subtitle: "Subscribe to our newsletter for the latest fintech trends, regulatory updates, and expert strategies.",
         posts: []
     },
     services: [
@@ -151,9 +169,9 @@ export const siteContent = {
         },
     ],
     stats: [
-        { label: "Years Experience", value: "10+" },
-        { label: "Happy Clients", value: "500+" },
-        { label: "Transaction Vol", value: "$2M+" },
+        { label: "Years Experience", value: "3+" },
+        { label: "Happy Clients", value: "200+" },
+        { label: "Transaction Vol", value: "$1M+" },
     ],
     testimonials: [
         {

@@ -47,7 +47,7 @@ export default function CustomCursor() {
         <>
             {/* Lagging Ring */}
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 rounded-full border border-primary pointer-events-none z-[9999] hidden md:flex items-center justify-center mix-blend-exclusion"
+                className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400/50 pointer-events-none z-[99999] hidden md:flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                 style={{
                     translateX: cursorXRing,
                     translateY: cursorYRing,
@@ -56,16 +56,16 @@ export default function CustomCursor() {
                 }}
                 animate={{
                     scale: isPointer ? 2.5 : 1,
-                    opacity: isPointer ? 0.5 : 1,
-                    backgroundColor: isPointer ? 'rgba(56, 189, 248, 0.1)' : 'transparent', // Light cyan tint on hover
-                    borderColor: isPointer ? 'transparent' : 'rgba(56, 189, 248, 0.8)',
+                    opacity: 1,
+                    backgroundColor: isPointer ? 'rgba(34, 211, 238, 0.1)' : 'transparent',
+                    borderColor: isPointer ? 'rgba(34, 211, 238, 0.2)' : 'rgba(34, 211, 238, 0.5)',
                 }}
                 transition={{ duration: 0.2 }}
             />
 
             {/* Snappy Dot */}
             <motion.div
-                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-exclusion"
+                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[99999] hidden md:block shadow-[0_0_10px_white]"
                 style={{
                     translateX: cursorXDot,
                     translateY: cursorYDot,

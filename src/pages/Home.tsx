@@ -1,10 +1,20 @@
-import heroVideo from '../assets/Video_Generation_of_Glass_Building.mp4';
 import whoWeAreVideo from '../assets/6561844-uhd_3840_2160_25fps.mp4';
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useAnimationFrame, type Variants } from 'framer-motion';
-import { ArrowRight, TrendingUp, ShieldCheck, Smartphone, Globe, BadgeIndianRupee, ArrowUpRight } from 'lucide-react';
+
+import { motion, useMotionValue, useAnimationFrame, AnimatePresence, type Variants } from 'framer-motion';
+import { ArrowRight, TrendingUp, ShieldCheck, Smartphone, Globe, BadgeIndianRupee, ArrowUpRight, Plus, Minus, MoveRight, Loader2, Check } from 'lucide-react';
+
 import { siteContent } from '../data/content';
 import { Link } from 'react-router-dom';
+import CommissionCalculator from '../components/CommissionCalculator';
+
+import Section3D from '../components/ui/Section3D';
+import Hero3D from '../components/Hero3D';
+import ParallaxCard from '../components/ui/ParallaxCard';
+import GetStartedWizard from '../components/GetStartedWizard';
+import { InfiniteMovingCards } from '../components/ui/InfiniteMovingCards';
+import { SpotlightCard } from '../components/ui/SpotlightCard';
+import { TypewriterText } from '../components/ui/TypewriterText';
 
 const fadeIn: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -22,41 +32,8 @@ const staggerContainer: Variants = {
 
 const viewportConfig = { once: false, amount: 0.2 };
 
-// 3D Tilt Card Component
-function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const rotateX = useTransform(y, [-100, 100], [5, -5]);
-    const rotateY = useTransform(x, [-100, 100], [-5, 5]);
-
-    function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
-        const rect = event.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-        x.set(xPct * 200);
-        y.set(yPct * 200);
-    }
-
-    function handleMouseLeave() {
-        x.set(0);
-        y.set(0);
-    }
-
-    return (
-        <motion.div
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className={className}
-        >
-            <div style={{ transform: "translateZ(20px)" }}>{children}</div>
-        </motion.div>
-    );
-}
+// 3D Tilt Card Component replaced by ParallaxCard
+const TiltCard = ParallaxCard;
 
 // Swipeable Partners Carousel
 function Marquee() {
@@ -142,135 +119,101 @@ function Marquee() {
     );
 }
 
-// Floating 3D Particles
-function FloatingParticles() {
-    // Generate static random data to avoid re-renders impacting performance
-    const particles = Array.from({ length: 20 }).map((_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 4 + 1,
-        duration: Math.random() * 20 + 10,
-        delay: Math.random() * 5
-    }));
 
+
+// FAQ Accordion Item
+const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answer: string, isOpen: boolean, onClick: () => void }) => {
     return (
-        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            {particles.map((p) => (
-                <motion.div
-                    key={p.id}
-                    className="absolute rounded-full bg-white/20 blur-[1px]"
-                    style={{
-                        left: `${p.x}%`,
-                        top: `${p.y}%`,
-                        width: p.size,
-                        height: p.size,
-                    }}
-                    animate={{
-                        y: [0, -100, 0],
-                        opacity: [0.2, 0.5, 0.2],
-                        scale: [1, 1.5, 1]
-                    }}
-                    transition={{
-                        duration: p.duration,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: p.delay
-                    }}
-                />
-            ))}
+        <div className="border-b border-white/10 last:border-none">
+            <button
+                onClick={onClick}
+                className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
+            >
+                <span className={`text-lg md:text-xl font-medium transition-colors ${isOpen ? 'text-primary' : 'text-white group-hover:text-primary-glow'}`}>
+                    {question}
+                </span>
+                <span className={`p-2 rounded-full border transition-all ${isOpen ? 'bg-primary border-primary text-black' : 'border-white/20 text-white group-hover:border-primary'}`}>
+                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                </span>
+            </button>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                    >
+                        <p className="pb-6 text-slate-400 leading-relaxed text-lg">
+                            {answer}
+                        </p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
-}
-
-
-
-
-// Seamless Loop Video Component
-function SeamlessLoopVideo({ src, className }: { src: string; className?: string }) {
-    const parentRef = useRef<HTMLDivElement>(null);
-    const video1Ref = useRef<HTMLVideoElement>(null);
-    const video2Ref = useRef<HTMLVideoElement>(null);
-    const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-
-    const playVideo = (video: HTMLVideoElement) => {
-        video.play().catch(error => {
-            console.log("Video play failed:", error);
-        });
-    };
-
-    const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-        const video = e.currentTarget;
-        const timeLeft = video.duration - video.currentTime;
-        const transitionTime = 1; // 1 second overlap
-
-        if (timeLeft <= transitionTime && !isTransitioning) {
-            setIsTransitioning(true);
-            const nextVideo = activeVideo === 1 ? video2Ref.current : video1Ref.current;
-
-            if (nextVideo) {
-                nextVideo.currentTime = 0;
-                playVideo(nextVideo);
-                setActiveVideo(activeVideo === 1 ? 2 : 1);
-            }
-        }
-    };
-
-    // Ensure initial video plays
-    useEffect(() => {
-        if (video1Ref.current) {
-            playVideo(video1Ref.current);
-        }
-    }, []);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setIsTransitioning(false);
-        }, 1200);
-        return () => clearTimeout(timeout);
-    }, [activeVideo]);
-
-    return (
-        <div className={`relative ${className}`} ref={parentRef}>
-            <motion.video
-                ref={video1Ref}
-                src={src}
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 1 }}
-                animate={{ opacity: activeVideo === 1 ? 0.6 : 0 }}
-                transition={{ duration: 1 }}
-                onTimeUpdate={activeVideo === 1 ? handleTimeUpdate : undefined}
-                onEnded={() => { if (activeVideo === 1) video1Ref.current?.play() }}
-            />
-            <motion.video
-                ref={video2Ref}
-                src={src}
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeVideo === 2 ? 0.6 : 0 }}
-                transition={{ duration: 1 }}
-                onTimeUpdate={activeVideo === 2 ? handleTimeUpdate : undefined}
-                onEnded={() => { if (activeVideo === 2) video2Ref.current?.play() }}
-            />
-        </div>
-    );
-}
+};
 
 export default function Home() {
+    const [isWizardOpen, setIsWizardOpen] = useState(false);
+    const [activeIndustry, setActiveIndustry] = useState(0);
+    const [isHovering, setIsHovering] = useState(false);
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+    const handleSubscribe = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email || !email.includes('@')) return;
+
+        setStatus('loading');
+
+        try {
+            // Use FormSubmit for free email handling
+            const destinationEmail = "freecontent.me@gmail.com";
+
+            const response = await fetch(`https://formsubmit.co/ajax/${destinationEmail}`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: "New Newsletter Subscriber!",
+                    email: email,
+                    message: "A new user has subscribed to the newsletter.",
+                    _template: "table"
+                })
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                setEmail("");
+                // Reset to idle after 3 seconds
+                setTimeout(() => setStatus('idle'), 3000);
+            } else {
+                setStatus('error');
+                console.error("Subscription failed:", await response.text());
+                setTimeout(() => setStatus('idle'), 3000);
+            }
+        } catch (error) {
+            console.error("Subscription error:", error);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 3000);
+        }
+    };
+
+    // Auto-rotate
+    useEffect(() => {
+        if (isHovering) return;
+        const interval = setInterval(() => {
+            setActiveIndustry((prev) => (prev + 1) % siteContent.industries.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [isHovering]);
+
+    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
     const targetRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: targetRef,
-        offset: ["start start", "end end"]
-    });
-
-    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
 
     const iconMap: any = {
         "ShieldCheck": <ShieldCheck className="w-10 h-10" />,
@@ -282,74 +225,20 @@ export default function Home() {
 
     return (
         <div className="flex flex-col w-full overflow-hidden" ref={targetRef}>
-            <FloatingParticles />
+            {/* --- NEW 3D HERO --- */}
+            <Hero3D onStart={() => setIsWizardOpen(true)} />
 
-            {/* --- HERO SECTION --- */}
-            <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background">
-                {/* Animated Background Mesh */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[120px] animate-aurora mix-blend-screen" />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-accent-violet/20 rounded-full blur-[100px] animate-aurora delay-1000 mix-blend-screen" />
-                    <div className="absolute top-[40%] left-[30%] w-[40%] h-[40%] bg-accent-cyan/10 rounded-full blur-[80px] animate-pulse-slow mix-blend-screen" />
-
-
-
-                    <SeamlessLoopVideo
-                        src={heroVideo}
-                        className="absolute inset-0 w-full h-full"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-                </div>
-
-                <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-                    <motion.div style={{ scale: heroScale, opacity: heroOpacity }} className="max-w-5xl">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1, ease: "easeOut" }}
-                            className="mb-8 inline-block"
-                        >
-                            <span className="py-2 px-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-medium text-accent-cyan tracking-wider uppercase">
-                                Leading Fintech Solutions
-                            </span>
-                        </motion.div>
-
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold mb-8 leading-none tracking-tighter text-white">
-                            <span className="block bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500">
-                                Strategic
-                            </span>
-                            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-primary-glow to-accent-violet animate-text-shimmer">
-                                Excellence.
-                            </span>
-                        </h1>
-
-                        <p className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-                            {siteContent.hero.subtitle}
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                            <Link to="/contact" className="group relative px-8 py-4 bg-white/10 overflow-hidden rounded-full backdrop-blur-md border border-white/20 hover:border-white/50 transition-all cursor-none ">
-                                <div className="absolute inset-0 bg-primary/50 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                                <span className="relative z-10 font-bold text-white flex items-center gap-3">
-                                    Start Your Journey <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </span>
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* Scroll Indicator */}
-                <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-500"
-                >
-                    <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-slate-500 to-transparent" />
-                </motion.div>
-            </section>
+            {/* Scroll Indicator */}
+            <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-500 z-30"
+            >
+                <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-slate-500 to-transparent" />
+            </motion.div>
 
             {/* --- STATS SECTION (New) --- */}
-            <section className="py-20 bg-slate-900 border-y border-white/5">
+            <Section3D className="py-20 bg-slate-900 border-y border-white/5">
                 <div className="container mx-auto px-6">
                     <motion.div
                         initial="hidden"
@@ -368,7 +257,7 @@ export default function Home() {
                         ))}
                     </motion.div>
                 </div>
-            </section>
+            </Section3D>
 
             {/* --- PARTNERS MARQUEE --- */}
             <section className="bg-slate-900/50 py-20">
@@ -376,7 +265,7 @@ export default function Home() {
             </section>
 
             {/* --- WHO WE ARE (Refined) --- */}
-            <section className="py-32 relative">
+            <Section3D className="py-32 relative">
                 <div className="container mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div className="relative h-[600px] w-full order-2 lg:order-1">
@@ -422,10 +311,87 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+            </Section3D>
+
+            {/* --- PROCESS / HOW IT WORKS (New) --- */}
+            <section className="py-24 bg-slate-950 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                <div className="container mx-auto px-6">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                        variants={fadeIn}
+                        className="text-center mb-20"
+                    >
+                        <span className="text-primary-glow font-bold tracking-widest uppercase text-sm mb-4 block">Our Process</span>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Simple Steps to Success</h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto text-lg">We've streamlined the journey so you can focus on growth.</p>
+                    </motion.div>
+
+                    <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12">
+                        {/* Connecting Line (Desktop) */}
+                        <div className="hidden md:block absolute top-12 left-0 w-full h-[2px] bg-white/5">
+                            <motion.div
+                                initial={{ width: 0 }}
+                                whileInView={{ width: "100%" }}
+                                transition={{ duration: 1.5, delay: 0.5 }}
+                                className="h-full bg-gradient-to-r from-primary/50 via-primary to-primary/50"
+                            />
+                        </div>
+
+                        {siteContent.process && siteContent.process.map((step, i) => (
+                            <motion.div
+                                key={i}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={viewportConfig}
+                                variants={{
+                                    hidden: { y: 20, opacity: 0 },
+                                    visible: { y: 0, opacity: 1, transition: { delay: i * 0.2 } }
+                                }}
+                                className="relative z-10 flex flex-col items-center text-center group"
+                            >
+                                <div className="w-24 h-24 rounded-full bg-slate-900 border-2 border-white/10 flex items-center justify-center text-3xl font-bold text-white mb-8 group-hover:border-primary group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-500 group-hover:from-primary group-hover:to-white">
+                                        {step.step}
+                                    </span>
+                                </div>
+                                <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
+                                <p className="text-slate-400 leading-relaxed max-w-xs mx-auto">{step.description}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* --- COMMISSION CALCULATOR (New) --- */}
+            <section className="py-20 relative overflow-hidden">
+                <div className="container mx-auto px-6">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                        variants={fadeIn}
+                        className="mb-12 text-center"
+                    >
+                        <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">Calculate Your Growth</h2>
+                        <p className="text-slate-400">See how much you can earn by partnering with Ananta.</p>
+                    </motion.div>
+
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                        variants={fadeIn}
+                    >
+                        <CommissionCalculator />
+                    </motion.div>
+                </div>
             </section>
 
             {/* --- WHY CHOOSE US (New) --- */}
-            <section className="py-32 bg-slate-950/50 relative">
+            <Section3D className="py-32 bg-slate-950 relative">
                 <div className="container mx-auto px-6">
                     <motion.div
                         initial="hidden"
@@ -438,31 +404,50 @@ export default function Home() {
                         <p className="text-slate-400 max-w-2xl mx-auto text-lg">Unmatched advantages for your financial growth.</p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {siteContent.benefits.map((benefit, i) => (
-                            <TiltCard key={i} className="h-full">
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={viewportConfig}
-                                    variants={fadeIn}
-                                    className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 transition-colors h-full"
-                                >
-                                    <div className="text-primary mb-6">
-                                        {iconMap[benefit.icon]}
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-white mb-4">{benefit.title}</h3>
-                                    <p className="text-slate-400 leading-relaxed">{benefit.description}</p>
-                                </motion.div>
-                            </TiltCard>
-                        ))}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <SpotlightCard className="h-full" spotlightColor="rgba(37, 99, 235, 0.4)">
+                            <div className="p-8 h-full flex flex-col relative z-20">
+                                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 mb-6">
+                                    <ShieldCheck className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-4">Bank-Grade Security</h3>
+                                <p className="text-slate-400 leading-relaxed">
+                                    Top-tier encryption and compliance with RBI guidelines ensure complete safety.
+                                </p>
+                            </div>
+                        </SpotlightCard>
+
+                        <SpotlightCard className="h-full" spotlightColor="rgba(37, 99, 235, 0.4)">
+                            <div className="p-8 h-full flex flex-col relative z-20">
+                                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 mb-6">
+                                    <TrendingUp className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-4">Real-Time Tracking</h3>
+                                <p className="text-slate-400 leading-relaxed">
+                                    Monitor all transactions and commissions in real-time with our advanced dashboard.
+                                </p>
+                            </div>
+                        </SpotlightCard>
+
+                        <SpotlightCard className="h-full" spotlightColor="rgba(37, 99, 235, 0.4)">
+                            <div className="p-8 h-full flex flex-col relative z-20">
+                                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 mb-6">
+                                    <Smartphone className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-4">24/7 Expert Support</h3>
+                                <p className="text-slate-400 leading-relaxed">
+                                    Dedicated relationship managers available round-the-clock to resolve any queries.
+                                </p>
+                            </div>
+                        </SpotlightCard>
                     </div>
                 </div>
-            </section>
+            </Section3D>
 
             {/* --- INDUSTRIES (Circular Mask + List) --- */}
             <section className="py-32 bg-slate-950 relative overflow-hidden">
-                <div className="container mx-auto px-6">
+                <div className="absolute inset-0 bg-hero-pattern opacity-5" />
+                <div className="container mx-auto px-6 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div>
                             <motion.h2
@@ -472,7 +457,7 @@ export default function Home() {
                                 variants={fadeIn}
                                 className="text-5xl md:text-6xl font-display font-bold text-white mb-16"
                             >
-                                Industries
+                                Industries We Empower
                             </motion.h2>
 
                             <motion.ul
@@ -480,25 +465,51 @@ export default function Home() {
                                 whileInView="visible"
                                 viewport={viewportConfig}
                                 variants={staggerContainer}
-                                className="space-y-8"
+                                className="space-y-6"
+                                onMouseEnter={() => setIsHovering(true)}
+                                onMouseLeave={() => setIsHovering(false)}
                             >
                                 {siteContent.industries.map((item, i) => (
-                                    <motion.li key={i} variants={fadeIn} className="group flex items-center gap-6 cursor-pointer">
-                                        <div className="w-12 h-[1px] bg-slate-700 group-hover:w-20 group-hover:bg-primary transition-all duration-300" />
-                                        <span className="text-2xl md:text-3xl text-slate-400 group-hover:text-white transition-colors">{item}</span>
+                                    <motion.li
+                                        key={i}
+                                        variants={fadeIn}
+                                        onMouseEnter={() => setActiveIndustry(i)}
+                                        className="group relative pl-8 py-4 cursor-pointer"
+                                    >
+                                        {/* Active Indicator Line */}
+                                        <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-full w-[2px] transition-all duration-300 ${activeIndustry === i ? 'bg-primary h-full' : 'bg-slate-800 h-0 group-hover:h-1/2'}`} />
+
+                                        <div className="flex items-center justify-between">
+                                            <span className={`text-2xl md:text-3xl font-medium transition-all duration-300 ${activeIndustry === i ? 'text-white translate-x-4' : 'text-slate-500 group-hover:text-slate-300'}`}>
+                                                {typeof item === 'string' ? item : item.name}
+                                            </span>
+                                            <ArrowRight className={`w-6 h-6 text-primary opacity-0 -translate-x-4 transition-all duration-300 ${activeIndustry === i ? 'opacity-100 translate-x-0' : ''}`} />
+                                        </div>
                                     </motion.li>
                                 ))}
                             </motion.ul>
                         </div>
 
-                        <div className="relative flex justify-center items-center">
-                            <div className="relative w-[500px] h-[500px] rounded-full overflow-hidden border border-white/10">
-                                <img
-                                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-                                    alt="Industries"
-                                    className="w-full h-full object-cover opacity-60"
+                        <div className="relative h-[600px] w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                            <AnimatePresence mode="wait">
+                                <motion.img
+                                    key={activeIndustry}
+                                    src={(siteContent.industries[activeIndustry] as any)?.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"}
+                                    alt="Industry"
+                                    initial={{ opacity: 0, scale: 1.1 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop";
+                                    }}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-black/50 to-transparent" />
+                            </AnimatePresence>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                            <div className="absolute bottom-0 left-0 p-10">
+                                <span className="text-primary font-bold tracking-widest uppercase mb-2 block">Industry Focus</span>
+                                <h3 className="text-3xl text-white font-bold">{typeof siteContent.industries[activeIndustry] === 'string' ? siteContent.industries[activeIndustry] : (siteContent.industries[activeIndustry] as any).name}</h3>
                             </div>
                         </div>
                     </div>
@@ -523,30 +534,39 @@ export default function Home() {
                         className="grid grid-cols-1 md:grid-cols-2 gap-8"
                     >
                         {siteContent.detailedSolutions.map((solution, i) => (
-                            <TiltCard key={i} className={`group ${i === siteContent.detailedSolutions.length - 1 ? 'md:col-span-2' : ''}`}>
-                                <motion.div
-                                    variants={fadeIn}
-                                    whileHover={{ y: -10 }}
-                                    className="h-full bg-slate-900/50 backdrop-blur-md border border-white/10 p-10 rounded-3xl hover:border-primary/30 transition-all duration-500 relative overflow-hidden"
+                            <motion.div
+                                key={i}
+                                variants={fadeIn}
+                                className={`h-full ${i === siteContent.detailedSolutions.length - 1 ? 'md:col-span-2' : ''}`}
+                            >
+                                <SpotlightCard
+                                    className="group h-full"
+                                    spotlightColor="rgba(37, 99, 235, 0.4)"
                                 >
-                                    <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-700 text-white">
-                                        {iconMap[solution.icon]}
-                                    </div>
+                                    <Link to="/solutions" className="block h-full w-full">
+                                        <div
+                                            className="h-full p-6 md:p-10 flex flex-col relative z-10"
+                                        >
+                                            <div className="absolute top-0 right-0 p-6 md:p-10 opacity-20 group-hover:opacity-40 transition-opacity transform group-hover:scale-110 duration-700 text-blue-600/50">
+                                                {iconMap[solution.icon]}
+                                            </div>
 
-                                    <h3 className="text-3xl font-display font-bold text-white mb-6 italic">{solution.title}</h3>
-                                    <p className="text-slate-400 leading-relaxed text-lg mb-8">
-                                        {solution.description}
-                                    </p>
+                                            <h3 className="text-3xl font-display font-bold text-white mb-6 italic tracking-wider">{solution.title}</h3>
+                                            <p className="text-slate-300 leading-relaxed text-lg mb-8 font-light flex-grow">
+                                                {solution.description}
+                                            </p>
 
-                                    {/* Learn More Footer */}
-                                    <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
-                                        <span className="text-sm font-bold text-white group-hover:text-primary-glow transition-colors">Learn more</span>
-                                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
-                                            <ArrowUpRight className="w-5 h-5" />
+                                            {/* Learn More Footer */}
+                                            <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
+                                                <span className="text-sm font-bold text-blue-500 group-hover:text-white transition-colors uppercase tracking-widest">Learn more</span>
+                                                <div className="w-10 h-10 rounded-full border border-blue-500/30 flex items-center justify-center group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(37,99,235,0.2)]">
+                                                    <ArrowUpRight className="w-5 h-5" />
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </motion.div>
-                            </TiltCard>
+                                    </Link>
+                                </SpotlightCard>
+                            </motion.div>
                         ))}
                     </motion.div>
                 </div>
@@ -564,27 +584,16 @@ export default function Home() {
                     >
                         The Perfect Customer Experience
                     </motion.h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {siteContent.testimonials.map((testimonial, i) => (
-                            <TiltCard key={i} className="group h-full">
-                                <motion.div
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={viewportConfig}
-                                    variants={fadeIn}
-                                    className="p-10 rounded-3xl bg-primary/20 backdrop-blur-md border border-white/5 relative h-full flex flex-col hover:bg-primary/30 transition-all duration-500 shadow-xl"
-                                >
-                                    <p className="text-white/90 text-lg mb-8 leading-relaxed flex-grow font-medium">"{testimonial.content}"</p>
-                                    <div className="border-t border-white/10 pt-6">
-                                        <div className="flex items-center gap-4 mb-1">
-                                            <div className="w-10 h-1 bg-black group-hover:w-16 transition-all duration-500" />
-                                            <h4 className="font-bold text-white text-xl">{testimonial.name}</h4>
-                                        </div>
-                                        <p className="text-sm text-slate-300 pl-14">{testimonial.role}</p>
-                                    </div>
-                                </motion.div>
-                            </TiltCard>
-                        ))}
+                    <div className="h-[40rem] rounded-md flex flex-col antialiased bg-transparent dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+                        <InfiniteMovingCards
+                            items={siteContent.testimonials.map(t => ({
+                                quote: t.content,
+                                name: t.name,
+                                title: t.role,
+                            }))}
+                            direction="right"
+                            speed="slow"
+                        />
                     </div>
                 </div>
             </section>
@@ -611,9 +620,42 @@ export default function Home() {
                         {siteContent.insights.subtitle}
                     </motion.p>
 
-                    <div className="w-full max-w-4xl mx-auto bg-black p-20 rounded-3xl border border-white/10 flex flex-col items-center justify-center text-center">
-                        <span className="text-2xl font-display text-white mb-4">Check back soon</span>
-                        <p className="text-slate-500">Once posts are published, you'll see them here.</p>
+                    <div className="w-full max-w-4xl mx-auto bg-white/5 backdrop-blur-sm p-12 rounded-3xl border border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                        <div className="relative z-10 w-full max-w-md mx-auto">
+                            <span className="inline-block p-4 rounded-full bg-white/10 mb-6 text-primary">
+                                <TrendingUp className="w-8 h-8" />
+                            </span>
+                            <h3 className="text-3xl font-display text-white mb-4">Join 5,000+ Subscribers</h3>
+                            <p className="text-slate-400 mb-8">Get exclusive fintech strategies and regulatory updates delivered to your inbox.</p>
+
+                            <form className="flex flex-col sm:flex-row gap-4" onSubmit={handleSubscribe}>
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Enter your email address"
+                                    disabled={status === 'loading' || status === 'success'}
+                                    className="flex-1 px-6 py-4 rounded-full bg-black/50 border border-white/20 text-white placeholder:text-slate-600 focus:outline-none focus:border-primary transition-colors disabled:opacity-50"
+                                />
+                                <button
+                                    disabled={status === 'loading' || status === 'success'}
+                                    className={`px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 min-w-[160px]
+                                        ${status === 'success' ? 'bg-green-500 text-white' : 'bg-white text-black hover:bg-primary'}
+                                        disabled:opacity-80
+                                    `}
+                                >
+                                    {status === 'loading' ? (
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                    ) : status === 'success' ? (
+                                        <>Subscribed <Check className="w-5 h-5" /></>
+                                    ) : (
+                                        <>Subscribe <MoveRight className="w-4 h-4" /></>
+                                    )}
+                                </button>
+                            </form>
+                        </div>
                     </div>
 
                     <div className="mt-16">
@@ -625,22 +667,51 @@ export default function Home() {
             </section>
 
 
+
+            {/* --- FAQ SECTION (New) --- */}
+            <section className="py-24 bg-slate-950 relative border-t border-white/5">
+                <div className="container mx-auto px-6 max-w-4xl">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                        variants={fadeIn}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Frequently Asked Questions</h2>
+                    </motion.div>
+
+                    <div className="space-y-2">
+                        {siteContent.faq && siteContent.faq.map((faq, i) => (
+                            <FAQItem
+                                key={i}
+                                question={faq.question}
+                                answer={faq.answer}
+                                isOpen={openFaqIndex === i}
+                                onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* --- CTA --- */}
             <section className="py-40 relative flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-primary/10" />
                 <div className="absolute inset-0 bg-hero-glow blur-[150px] opacity-30 animate-pulse-slow" />
 
                 <div className="container mx-auto px-6 relative z-10 text-center">
-                    <motion.h2
+                    <motion.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={viewportConfig}
-                        variants={fadeIn}
-                        className="text-5xl md:text-8xl font-display font-bold text-white mb-10 tracking-tight"
+                        className="mb-10 text-center"
                     >
-                        {siteContent.cta.title}
-                        {/* Ready to <span className="opacity-50 italic">scale</span>? */}
-                    </motion.h2>
+                        <TypewriterText
+                            text={siteContent.cta.title}
+                            className="text-5xl md:text-8xl font-display font-bold text-white tracking-tight inline-block"
+                        />
+                    </motion.div>
                     <motion.p
                         initial="hidden"
                         whileInView="visible"
@@ -662,6 +733,8 @@ export default function Home() {
                     </Link>
                 </div>
             </section>
+
+            <GetStartedWizard isOpen={isWizardOpen} onClose={() => setIsWizardOpen(false)} />
         </div>
     );
-}
+};
