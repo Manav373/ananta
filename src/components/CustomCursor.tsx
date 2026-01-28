@@ -47,7 +47,7 @@ export default function CustomCursor() {
         <>
             {/* Lagging Ring */}
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400/50 pointer-events-none z-[99999] hidden md:flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.3)]"
+                className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400/50 pointer-events-none z-[99999] hidden md:flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]"
                 style={{
                     translateX: cursorXRing,
                     translateY: cursorYRing,

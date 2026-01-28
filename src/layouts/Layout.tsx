@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             <img src={siteContent.brand.logo} alt="Anantaa" className="h-8 w-auto relative z-10" />
                         </div>
                         <span className="font-display font-bold text-lg tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                            ANANTAA
+                            ANANTAA CONSULTANCY
                         </span>
                     </Link>
 
@@ -137,7 +137,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
                         <div className="col-span-1 md:col-span-2">
                             <Link to="/" className="inline-block mb-8">
-                                <span className="text-3xl font-display font-bold text-white tracking-tight">ANANTAA</span>
+                                <span className="text-3xl font-display font-bold text-white tracking-tight">ANANTAA CONSULTANCY</span>
                             </Link>
                             <p className="text-lg leading-relaxed max-w-md text-slate-400 mb-8">
                                 {siteContent.brand.tagline}. Redefining financial distribution with cutting-edge technology and strategic expertise.
@@ -215,6 +215,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </footer>
             {/* WhatsApp Float */}
             <WhatsAppButton />
-        </div>
+        </div >
     );
 }

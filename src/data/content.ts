@@ -10,7 +10,7 @@ export const siteContent = {
     brand: {
         name: "Anantaa Consultancy",
         tagline: "Guiding You Towards Unprecedented Success with Proven Strategies",
-        logo: "https://static.wixstatic.com/media/9eb0df_e2e6e623b52f480c8da1cb19fe47ce98~mv2.png",
+        logo: "/Ananta.svg",
         contact: {
             email: "bhavik@anantaaconsultancy.com",
             phone: "+91 94094 08199",
