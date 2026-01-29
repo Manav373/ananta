@@ -11,9 +11,11 @@ import CommissionCalculator from '../components/CommissionCalculator';
 import Section3D from '../components/ui/Section3D';
 import Hero3D from '../components/Hero3D';
 import ParallaxCard from '../components/ui/ParallaxCard';
+import Hero3D from '../components/Hero3D';
+import ParallaxCard from '../components/ui/ParallaxCard';
 const GetStartedWizard = lazy(() => import('../components/GetStartedWizard'));
-import { InfiniteMovingCards } from '../components/ui/InfiniteMovingCards';
-import { SpotlightCard } from '../components/ui/SpotlightCard';
+const InfiniteMovingCards = lazy(() => import('../components/ui/InfiniteMovingCards').then(module => ({ default: module.InfiniteMovingCards })));
+const SpotlightCard = lazy(() => import('../components/ui/SpotlightCard').then(module => ({ default: module.SpotlightCard })));
 import { TypewriterText } from '../components/ui/TypewriterText';
 
 const fadeIn: Variants = {
@@ -542,33 +544,34 @@ export default function Home() {
                                 variants={fadeIn}
                                 className={`h-full ${i === siteContent.detailedSolutions.length - 1 ? 'md:col-span-2' : ''}`}
                             >
-                                <SpotlightCard
-                                    className="group h-full"
-                                    spotlightColor="rgba(37, 99, 235, 0.4)"
-                                >
-                                    <Link to="/solutions" className="block h-full w-full">
-                                        <div
-                                            className="h-full p-6 md:p-10 flex flex-col relative z-10"
-                                        >
-                                            <div className="absolute top-0 right-0 p-6 md:p-10 opacity-20 group-hover:opacity-40 transition-opacity transform group-hover:scale-110 duration-700 text-blue-600/50">
-                                                {iconMap[solution.icon]}
-                                            </div>
+                                <Suspense fallback={<div className="h-full min-h-[400px] w-full bg-slate-900/40 rounded-xl border border-white/5 animate-pulse" />}>
+                                    <SpotlightCard
+                                        className="group h-full"
+                                        spotlightColor="rgba(37, 99, 235, 0.4)"
+                                    >
+                                        <Link to="/solutions" className="block h-full w-full">
+                                            <div
+                                                className="h-full p-6 md:p-10 flex flex-col relative z-10"
+                                            >
+                                                <div className="absolute top-0 right-0 p-6 md:p-10 opacity-20 group-hover:opacity-40 transition-opacity transform group-hover:scale-110 duration-700 text-blue-600/50">
+                                                    {iconMap[solution.icon]}
+                                                </div>
 
-                                            <h3 className="text-3xl font-display font-bold text-white mb-6 italic tracking-wider">{solution.title}</h3>
-                                            <p className="text-slate-300 leading-relaxed text-lg mb-8 font-light flex-grow">
-                                                {solution.description}
-                                            </p>
+                                                <h3 className="text-3xl font-display font-bold text-white mb-6 italic tracking-wider">{solution.title}</h3>
+                                                <p className="text-slate-300 leading-relaxed text-lg mb-8 font-light flex-grow">
+                                                    {solution.description}
+                                                </p>
 
-                                            {/* Learn More Footer */}
-                                            <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
-                                                <span className="text-sm font-bold text-blue-500 group-hover:text-white transition-colors uppercase tracking-widest">Learn more</span>
-                                                <div className="w-10 h-10 rounded-full border border-blue-500/30 flex items-center justify-center group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(37,99,235,0.2)]">
-                                                    <ArrowUpRight className="w-5 h-5" />
+                                                {/* Learn More Footer */}
+                                                <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-auto">
+                                                    <span className="text-sm font-bold text-blue-500 group-hover:text-white transition-colors uppercase tracking-widest">Learn more</span>
+                                                    <div className="w-10 h-10 rounded-full border border-blue-500/30 flex items-center justify-center group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(37,99,235,0.2)]">
+                                                        <ArrowUpRight className="w-5 h-5" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                </SpotlightCard>
+                                        </Link>
+                                    </SpotlightCard>
                             </motion.div>
                         ))}
                     </motion.div>
@@ -588,15 +591,17 @@ export default function Home() {
                         The Perfect Customer Experience
                     </motion.h2>
                     <div className="h-[40rem] rounded-md flex flex-col antialiased bg-transparent dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
-                        <InfiniteMovingCards
-                            items={siteContent.testimonials.map(t => ({
-                                quote: t.content,
-                                name: t.name,
-                                title: t.role,
-                            }))}
-                            direction="right"
-                            speed="slow"
-                        />
+                        <Suspense fallback={<div className="w-full h-full bg-slate-900/20 animate-pulse" />}>
+                            <InfiniteMovingCards
+                                items={siteContent.testimonials.map(t => ({
+                                    quote: t.content,
+                                    name: t.name,
+                                    title: t.role,
+                                }))}
+                                direction="right"
+                                speed="slow"
+                            />
+                        </Suspense>
                     </div>
                 </div>
             </section>
