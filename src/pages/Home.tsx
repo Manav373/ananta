@@ -501,8 +501,11 @@ export default function Home() {
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.5 }}
                                     className="absolute inset-0 w-full h-full object-cover"
+                                    width="800"
+                                    height="600"
+                                    loading="lazy"
                                     onError={(e) => {
-                                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop";
+                                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&fm=webp&fit=crop";
                                     }}
                                 />
                             </AnimatePresence>
