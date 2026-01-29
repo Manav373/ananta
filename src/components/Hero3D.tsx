@@ -1,11 +1,14 @@
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import heroVideo from '../assets/Video_Generation_of_Glass_Building.mp4';
 import { ArrowRight } from 'lucide-react';
 
 export default function Hero3D({ onStart }: { onStart: () => void }) {
     const ref = useRef<HTMLDivElement>(null);
+    // Use refs to store bounds to avoid layout thrashing (forced reflow)
+    const bounds = useRef({ width: 0, height: 0, left: 0, top: 0 });
+
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start start", "end start"]
@@ -22,11 +25,42 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
     const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig); // Reduced intensity
     const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig); // Reduced intensity
 
+    // Update bounds only on resize/scroll, not every mouse move
+    useEffect(() => {
+        const updateBounds = () => {
+            if (ref.current) {
+                const rect = ref.current.getBoundingClientRect();
+                bounds.current = {
+                    width: rect.width,
+                    height: rect.height,
+                    left: rect.left,
+                    top: rect.top
+                };
+            }
+        };
+
+        // Initial measurement
+        updateBounds();
+
+        window.addEventListener('resize', updateBounds);
+        window.addEventListener('scroll', updateBounds);
+
+        return () => {
+            window.removeEventListener('resize', updateBounds);
+            window.removeEventListener('scroll', updateBounds);
+        };
+    }, []);
+
     function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
         // Optimization: Disable parallax calculation on mobile/tablet
         if (window.innerWidth < 1024) return;
 
-        const { width, height, left, top } = e.currentTarget.getBoundingClientRect();
+        // Read from cached bounds instead of querying DOM
+        const { width, height, left, top } = bounds.current;
+
+        // Safety check if bounds haven't been set yet
+        if (width === 0 || height === 0) return;
+
         const x = (e.clientX - left) / width - 0.5;
         const y = (e.clientY - top) / height - 0.5;
         mouseX.set(x);

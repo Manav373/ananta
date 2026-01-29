@@ -1,5 +1,5 @@
 import whoWeAreVideo from '../assets/6561844-uhd_3840_2160_25fps.mp4';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 
 import { motion, useMotionValue, useAnimationFrame, AnimatePresence, type Variants } from 'framer-motion';
 import { ArrowRight, TrendingUp, ShieldCheck, Smartphone, Globe, BadgeIndianRupee, ArrowUpRight, Plus, Minus, MoveRight, Loader2, Check } from 'lucide-react';
@@ -11,7 +11,7 @@ import CommissionCalculator from '../components/CommissionCalculator';
 import Section3D from '../components/ui/Section3D';
 import Hero3D from '../components/Hero3D';
 import ParallaxCard from '../components/ui/ParallaxCard';
-import GetStartedWizard from '../components/GetStartedWizard';
+const GetStartedWizard = lazy(() => import('../components/GetStartedWizard'));
 import { InfiniteMovingCards } from '../components/ui/InfiniteMovingCards';
 import { SpotlightCard } from '../components/ui/SpotlightCard';
 import { TypewriterText } from '../components/ui/TypewriterText';
@@ -129,7 +129,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answ
                 onClick={onClick}
                 className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
             >
-                <span className={`text-lg md:text-xl font-medium transition-colors ${isOpen ? 'text-primary' : 'text-white group-hover:text-primary-glow'}`}>
+                <span className={`text-lg md:text-xl font-medium transition-colors ${isOpen ? 'text-blue-400' : 'text-white group-hover:text-primary-glow'}`}>
                     {question}
                 </span>
                 <span className={`p-2 rounded-full border transition-all ${isOpen ? 'bg-primary border-primary text-black' : 'border-white/20 text-white group-hover:border-primary'}`}>
@@ -249,9 +249,9 @@ export default function Home() {
                     >
                         {siteContent.stats.map((stat, i) => (
                             <motion.div key={i} variants={fadeIn} className="text-center group">
-                                <h3 className="text-5xl md:text-6xl font-display font-bold text-white mb-2 group-hover:text-primary-glow transition-colors duration-500">
+                                <div className="text-5xl md:text-6xl font-display font-bold text-white mb-2 group-hover:text-primary-glow transition-colors duration-500">
                                     {stat.value}
-                                </h3>
+                                </div>
                                 <p className="text-slate-400 text-lg uppercase tracking-widest">{stat.label}</p>
                             </motion.div>
                         ))}
@@ -734,7 +734,9 @@ export default function Home() {
                 </div>
             </section>
 
-            <GetStartedWizard isOpen={isWizardOpen} onClose={() => setIsWizardOpen(false)} />
+            <Suspense fallback={null}>
+                <GetStartedWizard isOpen={isWizardOpen} onClose={() => setIsWizardOpen(false)} />
+            </Suspense>
         </div>
     );
 };

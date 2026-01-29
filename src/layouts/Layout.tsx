@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Link to="/" className="flex items-center gap-2 group">
                         <div className="relative">
                             <div className="absolute inset-0 bg-blue-500 blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                            <img src={siteContent.brand.logo} alt="Ananta Fintech Services" className="h-8 w-auto relative z-10" />
+                            <img src={siteContent.brand.logo} alt="Ananta Fintech Services" width="32" height="32" className="h-8 w-auto relative z-10" />
                         </div>
                         <span className="font-display font-bold text-lg tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
                             Ananta Fintech Services
@@ -85,6 +85,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className="md:hidden p-2 text-white bg-white/10 rounded-full backdrop-blur-md"
+                        aria-label="Toggle menu"
                     >
                         {isMobileMenuOpen ? <X /> : <Menu />}
                     </button>
@@ -153,6 +154,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
+                                        aria-label={`Follow us on ${url.includes('instagram') ? 'Instagram' : url.includes('facebook') ? 'Facebook' : url.includes('twitter') ? 'Twitter' : 'LinkedIn'}`}
                                     >
                                         <Icon className="w-5 h-5" />
                                     </a>
@@ -161,7 +163,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         </div>
 
                         <div>
-                            <h4 className="text-white font-bold mb-8 text-lg">Company</h4>
+                            <h3 className="text-white font-bold mb-8 text-lg">Company</h3>
                             <ul className="space-y-4">
                                 {[
                                     { name: 'Home', path: '/' },
@@ -178,14 +180,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         </div>
 
                         <div>
-                            <h4 className="text-white font-bold mb-8 text-lg">Contact</h4>
+                            <h3 className="text-white font-bold mb-8 text-lg">Contact</h3>
                             <ul className="space-y-6">
                                 <li className="flex items-start gap-4 group">
                                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
                                         <Mail className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <span className="block text-xs uppercase tracking-wider text-slate-500 mb-1">Email</span>
+                                        <span className="block text-xs uppercase tracking-wider text-slate-400 mb-1">Email</span>
                                         <span className="text-white">{siteContent.brand.contact.email}</span>
                                     </div>
                                 </li>
@@ -194,7 +196,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         <Phone className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <span className="block text-xs uppercase tracking-wider text-slate-500 mb-1">Phone</span>
+                                        <span className="block text-xs uppercase tracking-wider text-slate-400 mb-1">Phone</span>
                                         <span className="text-white">{siteContent.brand.contact.phone}</span>
                                     </div>
                                 </li>

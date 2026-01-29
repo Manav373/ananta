@@ -63,7 +63,7 @@ export const siteContent = {
         },
     },
     industries: [
-        { name: "KIOSK Banking Centers", image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop" },
+        { name: "KIOSK Banking Centers", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" },
         { name: "Payment Gateway Services", image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=2070&auto=format&fit=crop" },
         { name: "Finance & Loan Services", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2070&auto=format&fit=crop" },
         { name: "Domestic Money Transfer", image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=2070&auto=format&fit=crop" },

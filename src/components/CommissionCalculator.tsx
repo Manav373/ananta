@@ -50,6 +50,7 @@ export default function CommissionCalculator() {
                                 value={transactions}
                                 onChange={(e) => setTransactions(Number(e.target.value))}
                                 className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary hover:accent-primary-glow transition-all"
+                                aria-label="Daily Transactions"
                             />
                         </div>
 
@@ -67,6 +68,7 @@ export default function CommissionCalculator() {
                                 value={avgTicket}
                                 onChange={(e) => setAvgTicket(Number(e.target.value))}
                                 className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary hover:accent-primary-glow transition-all"
+                                aria-label="Average Transaction Value"
                             />
                         </div>
                     </div>
