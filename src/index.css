@@ -40,12 +40,32 @@
 
 /* Glassmorphism Utilities */
 .glass {
-  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  @apply bg-white/5 border border-white/10;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(8px);
+    /* Reduce blur on mobile for performance */
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
 .glass-holographic {
-  @apply bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-500 relative overflow-hidden;
+  @apply bg-white/5 border border-white/10 transition-all duration-500 relative overflow-hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .glass-holographic {
+    backdrop-filter: blur(6px);
+    /* Reduce blur on mobile */
+    -webkit-backdrop-filter: blur(6px);
+  }
 }
 
 .glass-holographic:hover {
@@ -59,7 +79,16 @@
 }
 
 .glass-card {
-  @apply bg-surface/50 backdrop-blur-md border border-white/5 hover:border-primary-glow/50 transition-all duration-500;
+  @apply bg-surface/50 border border-white/5 hover:border-primary-glow/50 transition-all duration-500;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 }
 
 .text-gradient {

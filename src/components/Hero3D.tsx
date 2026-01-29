@@ -23,6 +23,9 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
     const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig); // Reduced intensity
 
     function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+        // Optimization: Disable parallax calculation on mobile/tablet
+        if (window.innerWidth < 1024) return;
+
         const { width, height, left, top } = e.currentTarget.getBoundingClientRect();
         const x = (e.clientX - left) / width - 0.5;
         const y = (e.clientY - top) / height - 0.5;
@@ -73,7 +76,7 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
                     className="mb-8"
                 >
                     <span className="py-2 px-6 rounded-full bg-blue-900/40 border border-blue-500/30 backdrop-blur-md text-sm font-semibold text-blue-200 tracking-widest uppercase">
-                        The Future of Finance
+                        Anantaa Finetech
                     </span>
                 </motion.div>
 
@@ -84,9 +87,9 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
                     style={{ transform: "translateZ(50px)" }}
                     className="text-5xl md:text-8xl font-display font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-xl"
                 >
-                    ANANTAA
+                    Anantaa
                     <span className="block text-blue-500">
-                        CONSULTANCY
+                        Finetech
                     </span>
                 </motion.h1>
 

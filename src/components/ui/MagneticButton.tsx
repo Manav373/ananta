@@ -12,6 +12,9 @@ export default function MagneticButton({ children, className = "", onClick }: Ma
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+        // Optimization: Disable magnetic effect on mobile
+        if (window.innerWidth < 1024) return;
+
         const { clientX, clientY } = e;
         const { left, top, width, height } = ref.current!.getBoundingClientRect();
         const middleX = clientX - (left + width / 2);

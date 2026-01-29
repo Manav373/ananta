@@ -43,7 +43,7 @@ export default function HeroModern({ onStart }: { onStart: () => void }) {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
                     >
-                        Anantaa provides the infrastructure, strategy, and technology to bridge the gap between traditional banking and the next billion users.
+                        Anantaa Finetech provides the infrastructure, strategy, and technology to bridge the gap between traditional banking and the next billion users.
                     </motion.p>
 
                     {/* Buttons */}

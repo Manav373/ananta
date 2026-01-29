@@ -8,6 +8,8 @@ export const SpotlightCard = ({ children, className = "", spotlightColor = "rgba
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!divRef.current) return;
+        // Optimization: Disable spotlight on mobile/tablet
+        if (window.innerWidth < 1024) return;
 
         const rect = divRef.current.getBoundingClientRect();
         setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });

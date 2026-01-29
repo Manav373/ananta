@@ -18,6 +18,11 @@ export default function CustomCursor() {
     const cursorYDot = useSpring(cursorY, springConfigDot);
 
     useEffect(() => {
+        // Optimization: Disable custom cursor logic on touch devices or small screens
+        if (window.matchMedia("(hover: none) and (pointer: coarse)").matches || window.innerWidth < 768) {
+            return;
+        }
+
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
@@ -42,6 +47,11 @@ export default function CustomCursor() {
             window.removeEventListener('mousemove', moveCursor);
         };
     }, [cursorX, cursorY]);
+
+    // Don't render anything on mobile/touch
+    if (typeof window !== 'undefined' && (window.matchMedia("(hover: none) and (pointer: coarse)").matches || window.innerWidth < 768)) {
+        return null;
+    }
 
     return (
         <>

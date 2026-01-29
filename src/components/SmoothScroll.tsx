@@ -6,6 +6,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
+        // Optimization: Disable smooth scroll on touch devices for native performance
+        if (window.matchMedia("(hover: none) and (pointer: coarse)").matches || window.innerWidth < 768) {
+            return;
+        }
+
         lenisRef.current = new Lenis({
             duration: 1.2,
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

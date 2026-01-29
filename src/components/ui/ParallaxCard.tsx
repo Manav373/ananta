@@ -19,6 +19,9 @@ export default function ParallaxCard({ children, className = "" }: ParallaxCardP
     const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        // Optimization: Disable 3D tilt on mobile/tablet
+        if (window.innerWidth < 1024) return;
+
         const rect = ref.current!.getBoundingClientRect();
         const width = rect.width;
         const height = rect.height;

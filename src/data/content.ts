@@ -8,7 +8,7 @@ import pnbLogo from '../assets/pnb.png';
 
 export const siteContent = {
     brand: {
-        name: "Anantaa Consultancy",
+        name: "Anantaa Finetech",
         tagline: "Guiding You Towards Unprecedented Success with Proven Strategies",
         logo: "/Ananta.svg",
         contact: {
@@ -40,14 +40,14 @@ export const siteContent = {
     ],
     about: {
         title: "Who We Are",
-        header: "Welcome to Ananta Consultancy Se — where innovation meets excellence.",
-        description: "Founded in 2024, Ananta Consultancy Services is a dedicated team of professionals delivering exceptional banking and financial services that truly make a difference. With a strong focus on quality, innovation, and client satisfaction, we craft tailored solutions that not only meet your business needs but consistently exceed expectations.",
-        description2: "At Ananta, we believe in building enduring partnerships through trust, transparency, and unmatched service excellence. Whether you're engaging with us for the first time or are a long-standing client, our commitment remains the same: to help you succeed.",
+        header: "Welcome to Anantaa Finetech — where innovation meets excellence.",
+        description: "Founded in 2024, Anantaa Finetech is a dedicated team of professionals delivering exceptional banking and financial services that truly make a difference. With a strong focus on quality, innovation, and client satisfaction, we craft tailored solutions that not only meet your business needs but consistently exceed expectations.",
+        description2: "At Anantaa Finetech, we believe in building enduring partnerships through trust, transparency, and unmatched service excellence. Whether you're engaging with us for the first time or are a long-standing client, our commitment remains the same: to help you succeed.",
         image: "https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg",
         founder: {
             name: "Bhavik Panchal",
             role: "Founder & CEO",
-            bio: "As the Founder of Ananta Fintech, I lead the company's vision, partnerships, and growth strategy while ensuring transparent and compliant fintech distribution through authorized platforms.",
+            bio: "As the Founder of Anantaa Finetech, I lead the company's vision, partnerships, and growth strategy while ensuring transparent and compliant fintech distribution through authorized platforms.",
             image: "https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg",
             socials: {
                 linkedin: "https://www.linkedin.com/in/bhavik-panchal-b04a2b219/",
@@ -89,27 +89,27 @@ export const siteContent = {
     detailedSolutions: [
         {
             title: "Risk Management",
-            description: "We at Ananta Consultancy provide customer service centers for various banks. By opening these centers, individuals can earn a good income responsibly while also delivering excellent service to customers.",
+            description: "We at Anantaa Finetech provide customer service centers for various banks. By opening these centers, individuals can earn a good income responsibly while also delivering excellent service to customers.",
             icon: "ShieldCheck"
         },
         {
             title: "Market Analysis",
-            description: "At Ananta Consultancy, our market analysis shows a growing demand for accessible banking and financial services, especially in semi-urban and rural areas. Many customers seek convenient, local service centers for tasks like account opening, KYC, and loan guidance. By partnering with various banks, we tap into this unmet need—empowering individuals to run service centers that generate steady income while improving financial access in their communities.",
+            description: "At Anantaa Finetech, our market analysis shows a growing demand for accessible banking and financial services, especially in semi-urban and rural areas. Many customers seek convenient, local service centers for tasks like account opening, KYC, and loan guidance. By partnering with various banks, we tap into this unmet need—empowering individuals to run service centers that generate steady income while improving financial access in their communities.",
             icon: "TrendingUp"
         },
         {
             title: "Business Strategy",
-            description: "Based on our market analysis, Ananta Consultancy focuses on expanding customer service centers in high-demand areas with limited banking access. Our strategy is to partner with leading banks, train local entrepreneurs, and equip them with the tools and support needed to operate efficiently. This approach not only boosts financial inclusion but also creates sustainable income opportunities at the grassroots level.",
+            description: "Based on our market analysis, Anantaa Finetech focuses on expanding customer service centers in high-demand areas with limited banking access. Our strategy is to partner with leading banks, train local entrepreneurs, and equip them with the tools and support needed to operate efficiently. This approach not only boosts financial inclusion but also creates sustainable income opportunities at the grassroots level.",
             icon: "Globe"
         },
         {
             title: "Financial Advisory",
-            description: "At Ananta Consultancy, we also provide expert financial advisory services to help customers make informed decisions about banking products, loans, and personal finance. Through our service centers, trained advisors guide individuals on loan eligibility, documentation, repayment planning, and government schemes—ensuring they choose the right financial solutions based on their needs and capacity.",
+            description: "At Anantaa Finetech, we also provide expert financial advisory services to help customers make informed decisions about banking products, loans, and personal finance. Through our service centers, trained advisors guide individuals on loan eligibility, documentation, repayment planning, and government schemes—ensuring they choose the right financial solutions based on their needs and capacity.",
             icon: "BadgeIndianRupee"
         },
         {
             title: "Operational Efficiency",
-            description: "At Ananta Consultancy, operational efficiency is achieved by streamlining our customer service center processes—using trained staff, digital tools, and standardized procedures to handle all types of banking and loan services quickly and accurately. This ensures faster service delivery, reduced errors, better customer satisfaction, and smooth coordination with partner banks, allowing each center to operate effectively and profitably.",
+            description: "At Anantaa Finetech, operational efficiency is achieved by streamlining our customer service center processes—using trained staff, digital tools, and standardized procedures to handle all types of banking and loan services quickly and accurately. This ensures faster service delivery, reduced errors, better customer satisfaction, and smooth coordination with partner banks, allowing each center to operate effectively and profitably.",
             icon: "Smartphone"
         }
     ],
@@ -211,7 +211,7 @@ export const siteContent = {
     ],
     cta: {
         title: "Ready to Transform Your Financial Infrastructure?",
-        subtitle: "Join hundreds of successful partners who have scaled their business with Ananta Consultancy.",
+        subtitle: "Join hundreds of successful partners who have scaled their business with Anantaa Finetech.",
         buttonText: "Get Started Now",
         link: "/contact"
     }

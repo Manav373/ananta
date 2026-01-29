@@ -4,7 +4,6 @@ import { Menu, X, ArrowRight, Instagram, Facebook, Twitter, Linkedin, Mail, Phon
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteContent } from '../data/content';
 import CustomCursor from '../components/CustomCursor';
-import GrainOverlay from '../components/ui/GrainOverlay';
 import WhatsAppButton from '../components/WhatsAppButton';
 import clsx from 'clsx';
 
@@ -29,7 +28,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div className="min-h-screen flex flex-col font-sans bg-background text-text-primary selection:bg-primary-glow/30">
             <CustomCursor />
-            <GrainOverlay />
 
             {/* Navbar - Floating Glass Capsule */}
             <div className="fixed top-0 w-full z-50 flex justify-center pt-6 px-4">
@@ -50,7 +48,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                             <img src={siteContent.brand.logo} alt="Anantaa" className="h-8 w-auto relative z-10" />
                         </div>
                         <span className="font-display font-bold text-lg tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                            ANANTAA CONSULTANCY
+                            Anantaa Finetech
                         </span>
                     </Link>
 
@@ -137,7 +135,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
                         <div className="col-span-1 md:col-span-2">
                             <Link to="/" className="inline-block mb-8">
-                                <span className="text-3xl font-display font-bold text-white tracking-tight">ANANTAA CONSULTANCY</span>
+                                <span className="text-3xl font-display font-bold text-white tracking-tight">Anantaa Finetech</span>
                             </Link>
                             <p className="text-lg leading-relaxed max-w-md text-slate-400 mb-8">
                                 {siteContent.brand.tagline}. Redefining financial distribution with cutting-edge technology and strategic expertise.
@@ -205,7 +203,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </div>
 
                     <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-                        <span>© {new Date().getFullYear()} Anantaa Consultancy. All rights reserved.</span>
+                        <span>© {new Date().getFullYear()} Anantaa Finetech. All rights reserved.</span>
                         <div className="flex gap-8">
                             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

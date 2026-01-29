@@ -38,7 +38,7 @@ const fadeInUp: Variants = {
 };
 
 const timelineData = [
-    { year: "2023", title: "Inception", description: "Anantaa Consultancy was born with a vision to bridge the gap between traditional banking and the unbanked sector." },
+    { year: "2023", title: "Inception", description: "Anantaa Finetech was born with a vision to bridge the gap between traditional banking and the unbanked sector." },
     { year: "2024", title: "Market Penetration", description: "Established a robust network of 100+ CSPs across Tier-2 cities, generating over ₹50M in transaction volume." },
     { year: "2025", title: "Digital Expansion", description: " Launching our proprietary digital platform and expanding services to include deeper financial advisory." },
     { year: "Future", title: "National Dominance", description: "Aiming for a pan-India presence, empowering 10,000+ micro-entrepreneurs." }
