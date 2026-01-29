@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.anantaaconsultancy.com/</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.anantaaconsultancy.com/logo.svg</image:loc>
+      <image:title>Ananta Fintech Services</image:title>
+      <image:caption>Ananta Fintech Services Logo</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://static.wixstatic.com/media/c837a6_4380b6050e044e0b8eed12077cc1f883f000.jpg</image:loc>
+      <image:title>Financial Infrastructure</image:title>
+      <image:caption>Ananta Fintech Services Hero Background</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.anantaaconsultancy.com/about</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg</image:loc>
+      <image:title>About Ananta Fintech Services</image:title>
+      <image:caption>Ananta Fintech Services Office &amp; Team</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg</image:loc>
+      <image:title>Bhavik Panchal - Founder &amp; CEO</image:title>
+      <image:caption>Leadership at Ananta Fintech Services</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.anantaaconsultancy.com/solutions</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&amp;w=2070&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>KIOSK Banking Centers</image:title>
+      <image:caption>Setup and support for KIOSK banking</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&amp;w=2070&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Payment Gateway Services</image:title>
+      <image:caption>Secure payment gateway solutions</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.anantaaconsultancy.com/contact</loc>

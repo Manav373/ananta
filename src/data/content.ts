@@ -10,7 +10,7 @@ export const siteContent = {
     brand: {
         name: "Ananta Fintech Services",
         tagline: "Guiding You Towards Unprecedented Success with Proven Strategies",
-        logo: "/Ananta.svg",
+        logo: "/logo.svg",
         contact: {
             email: "bhavik@anantaaconsultancy.com",
             phone: "+91 94094 08199",
@@ -177,17 +177,17 @@ export const siteContent = {
         {
             name: "Sandip Patel",
             role: "Rajkot",
-            content: "Good experience with Anantaa Finetech. Services are well-managed through authorized platforms, and support is always responsive when needed."
+            content: "Good experience with Ananta Fintech Services. Services are well-managed through authorized platforms, and support is always responsive when needed."
         },
         {
             name: "Rohit Singh",
             role: "Surat",
-            content: "Professional approach and honest communication. Anantaa Finetech helped us start fintech services with proper training and continuous assistance."
+            content: "Professional approach and honest communication. Ananta Fintech Services helped us start fintech services with proper training and continuous assistance."
         },
         {
             name: "Sachin",
             role: "Himmatnagar",
-            content: "Anantaa Finetech provides clear guidance and reliable support. The onboarding process was smooth, and their team explains everything transparently."
+            content: "Ananta Fintech Services provides clear guidance and reliable support. The onboarding process was smooth, and their team explains everything transparently."
         }
     ],
     faq: [
@@ -211,7 +211,7 @@ export const siteContent = {
     ],
     cta: {
         title: "Ready to Transform Your Financial Infrastructure?",
-        subtitle: "Join hundreds of successful partners who have scaled their business with Anantaa Finetech.",
+        subtitle: "Join hundreds of successful partners who have scaled their business with Ananta Fintech Services.",
         buttonText: "Get Started Now",
         link: "/contact"
     }

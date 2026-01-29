@@ -135,7 +135,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
                         <div className="col-span-1 md:col-span-2">
                             <Link to="/" className="inline-block mb-8">
-                                <span className="text-3xl font-display font-bold text-white tracking-tight">Anantaa Finetech</span>
+                                <span className="text-3xl font-display font-bold text-white tracking-tight">Ananta Fintech Services</span>
                             </Link>
                             <p className="text-lg leading-relaxed max-w-md text-slate-400 mb-8">
                                 {siteContent.brand.tagline}. Redefining financial distribution with cutting-edge technology and strategic expertise.
@@ -203,7 +203,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </div>
 
                     <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-                        <span>© {new Date().getFullYear()} Anantaa Finetech. All rights reserved.</span>
+                        <span>© {new Date().getFullYear()} Ananta Fintech Services. All rights reserved.</span>
                         <div className="flex gap-8">
                             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
