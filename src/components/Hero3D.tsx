@@ -84,6 +84,7 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/30 z-10" />
                 <video
                     src={heroVideo}
+                    poster="https://static.wixstatic.com/media/c837a6_4380b6050e044e0b8eed12077cc1f883f000.jpg"
                     autoPlay
                     loop
                     muted
