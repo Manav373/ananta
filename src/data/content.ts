@@ -177,17 +177,17 @@ export const siteContent = {
         {
             name: "Sandip Patel",
             role: "Rajkot",
-            content: "Good experience with Ananta Fintech. Services are well-managed through authorized platforms, and support is always responsive when needed."
+            content: "Good experience with Anantaa Finetech. Services are well-managed through authorized platforms, and support is always responsive when needed."
         },
         {
             name: "Rohit Singh",
             role: "Surat",
-            content: "Professional approach and honest communication. Ananta Fintech helped us start fintech services with proper training and continuous assistance."
+            content: "Professional approach and honest communication. Anantaa Finetech helped us start fintech services with proper training and continuous assistance."
         },
         {
             name: "Sachin",
             role: "Himmatnagar",
-            content: "Ananta Fintech provides clear guidance and reliable support. The onboarding process was smooth, and their team explains everything transparently."
+            content: "Anantaa Finetech provides clear guidance and reliable support. The onboarding process was smooth, and their team explains everything transparently."
         }
     ],
     faq: [

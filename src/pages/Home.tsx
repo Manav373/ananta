@@ -376,7 +376,7 @@ export default function Home() {
                         className="mb-12 text-center"
                     >
                         <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">Calculate Your Growth</h2>
-                        <p className="text-slate-400">See how much you can earn by partnering with Ananta.</p>
+                        <p className="text-slate-400">See how much you can earn by partnering with Anantaa.</p>
                     </motion.div>
 
                     <motion.div
@@ -400,7 +400,7 @@ export default function Home() {
                         variants={fadeIn}
                         className="text-center mb-20"
                     >
-                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Why Choose Ananta?</h2>
+                        <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Why Choose Anantaa?</h2>
                         <p className="text-slate-400 max-w-2xl mx-auto text-lg">Unmatched advantages for your financial growth.</p>
                     </motion.div>
 
