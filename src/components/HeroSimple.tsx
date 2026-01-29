@@ -29,7 +29,7 @@ export default function HeroSimple({ onStart }: { onStart: () => void }) {
                     className="mb-6 md:mb-8"
                 >
                     <span className="py-2 px-4 md:px-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs md:text-sm font-medium text-accent-cyan tracking-wider uppercase">
-                        Anantaa Finetech
+                        Ananta Fintech Services
                     </span>
                 </motion.div>
 
@@ -39,9 +39,9 @@ export default function HeroSimple({ onStart }: { onStart: () => void }) {
                     transition={{ duration: 1, delay: 0.4 }}
                     className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-display font-black mb-6 md:mb-8 leading-none tracking-tighter text-white"
                 >
-                    Anantaa
+                    Ananta
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-neon-magenta">
-                        Finetech
+                        Fintech Services
                     </span>
                 </motion.h1>
 

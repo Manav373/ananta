@@ -38,7 +38,7 @@ const fadeInUp: Variants = {
 };
 
 const timelineData = [
-    { year: "2023", title: "Inception", description: "Anantaa Finetech was born with a vision to bridge the gap between traditional banking and the unbanked sector." },
+    { year: "2023", title: "Inception", description: "Ananta Fintech Services was born with a vision to bridge the gap between traditional banking and the unbanked sector." },
     { year: "2024", title: "Market Penetration", description: "Established a robust network of 100+ CSPs across Tier-2 cities, generating over ₹50M in transaction volume." },
     { year: "2025", title: "Digital Expansion", description: " Launching our proprietary digital platform and expanding services to include deeper financial advisory." },
     { year: "Future", title: "National Dominance", description: "Aiming for a pan-India presence, empowering 10,000+ micro-entrepreneurs." }
@@ -231,7 +231,7 @@ export default function About() {
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl font-bold mb-4">Why Partner With Us?</h2>
-                            <p className="text-slate-400">The Anantaa Advantage</p>
+                            <p className="text-slate-400">The Ananta Fintech Services Advantage</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

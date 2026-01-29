@@ -76,7 +76,7 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
                     className="mb-8"
                 >
                     <span className="py-2 px-6 rounded-full bg-blue-900/40 border border-blue-500/30 backdrop-blur-md text-sm font-semibold text-blue-200 tracking-widest uppercase">
-                        Anantaa Finetech
+                        Ananta Fintech Services
                     </span>
                 </motion.div>
 
@@ -87,9 +87,9 @@ export default function Hero3D({ onStart }: { onStart: () => void }) {
                     style={{ transform: "translateZ(50px)" }}
                     className="text-5xl md:text-8xl font-display font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-xl"
                 >
-                    Anantaa
+                    Ananta
                     <span className="block text-blue-500">
-                        Finetech
+                        Fintech Services
                     </span>
                 </motion.h1>
 

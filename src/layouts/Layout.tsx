@@ -45,10 +45,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Link to="/" className="flex items-center gap-2 group">
                         <div className="relative">
                             <div className="absolute inset-0 bg-blue-500 blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                            <img src={siteContent.brand.logo} alt="Anantaa" className="h-8 w-auto relative z-10" />
+                            <img src={siteContent.brand.logo} alt="Ananta Fintech Services" className="h-8 w-auto relative z-10" />
                         </div>
                         <span className="font-display font-bold text-lg tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                            Anantaa Finetech
+                            Ananta Fintech Services
                         </span>
                     </Link>
 
