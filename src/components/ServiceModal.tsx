@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { siteContent } from '../data/content';
-import { Landmark, CreditCard, BadgeIndianRupee, Send, Smartphone, Banknote, X, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { Landmark, CreditCard, BadgeIndianRupee, Send, Smartphone, Banknote, X, CheckCircle, ArrowUpRight, Shield } from 'lucide-react';
 
 export const iconMap: Record<string, React.ReactNode> = {
     "Landmark": <Landmark className="w-8 h-8" />,
@@ -12,6 +12,7 @@ export const iconMap: Record<string, React.ReactNode> = {
     "Send": <Send className="w-8 h-8" />,
     "Atm": <Banknote className="w-8 h-8" />,
     "Smartphone": <Smartphone className="w-8 h-8" />,
+    "Shield": <Shield className="w-8 h-8" />,
 };
 
 interface ServiceModalProps {

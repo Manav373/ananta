@@ -182,6 +182,14 @@ export const siteContent = {
             benefits: ["Monthly Rental Income", "Transaction-based Earnings", "Increased Footfall", "Maintenance Included"]
         },
         {
+            title: "Insurance Services",
+            description: "Comprehensive coverage for health, life, and general insurance needs.",
+            icon: "Shield",
+            longDescription: "Secure your future with our extensive range of insurance products. We partner with leading insurers to offer Life, Health, Motor, and General Insurance policies with seamless claim support.",
+            features: ["Health Insurance", "Life Insurance", "Motor Insurance", "Shop Insurance"],
+            benefits: ["Instant Policy Issuance", "High Claim Settlement Ratio", "Paperless Process", "Best Premium Rates"]
+        },
+        {
             title: "Digital Payments",
             description: "AEPS (Aadhaar Enabled Payment System) and other digital solutions.",
             icon: "Smartphone",
