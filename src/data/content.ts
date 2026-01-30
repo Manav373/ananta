@@ -3,8 +3,18 @@ import bobLogo from '../assets/bob.png';
 import kotakLogo from '../assets/kotak.png';
 import punjabLogo from '../assets/punjab.png';
 import xpLogo from '../assets/xp.jpg';
-import indusImport from '../assets/image-48-1.webp'; // Assuming this is the remaining logo based on file count
+import indusImport from '../assets/image-48-1.webp';
 import pnbLogo from '../assets/pnb.png';
+import hdfcLogo from '../assets/hdfc-bank-logo.svg';
+import mosLogo from '../assets/mos-logo-6583e3dcd5294.webp';
+import logoNew from '../assets/logo_new.webp';
+import newLogo from '../assets/newlogo.svg';
+import chatGpt1 from '../assets/ChatGPT Image Jan 30, 2026, 06_58_23 PM.png';
+import chatGpt2 from '../assets/ChatGPT Image Jan 30, 2026, 06_56_51 PM.png';
+import chatGpt3 from '../assets/ChatGPT Image Jan 30, 2026, 06_53_47 PM.png';
+import img8841 from '../assets/8841736417359.webp';
+import img5471 from '../assets/547167564_1416642487134167_7354644739899953435_n.jpg';
+import img21 from '../assets/21.png';
 
 export const siteContent = {
     brand: {
@@ -37,6 +47,18 @@ export const siteContent = {
         { name: "State Bank of India", logo: indusImport },
         { name: "Xpresso Bill Shop", logo: xpLogo },
         { name: "Punjab National Bank", logo: pnbLogo },
+    ],
+    partners2: [
+        { name: "HDFC Bank", logo: hdfcLogo },
+        { name: "MOS Logo", logo: mosLogo },
+        { name: "Logo New", logo: logoNew },
+        { name: "New Logo", logo: newLogo },
+        { name: "Image 21", logo: img21 },
+        { name: "GPT Image 1", logo: chatGpt1 },
+        { name: "GPT Image 2", logo: chatGpt2 },
+        { name: "GPT Image 3", logo: chatGpt3 },
+        { name: "Webp Image", logo: img8841 },
+        { name: "JPG Image", logo: img5471 },
     ],
     about: {
         title: "Who We Are",

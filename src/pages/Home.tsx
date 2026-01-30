@@ -11,8 +11,7 @@ import CommissionCalculator from '../components/CommissionCalculator';
 import Section3D from '../components/ui/Section3D';
 import Hero3D from '../components/Hero3D';
 import ParallaxCard from '../components/ui/ParallaxCard';
-import Hero3D from '../components/Hero3D';
-import ParallaxCard from '../components/ui/ParallaxCard';
+
 const GetStartedWizard = lazy(() => import('../components/GetStartedWizard'));
 const InfiniteMovingCards = lazy(() => import('../components/ui/InfiniteMovingCards').then(module => ({ default: module.InfiniteMovingCards })));
 const SpotlightCard = lazy(() => import('../components/ui/SpotlightCard').then(module => ({ default: module.SpotlightCard })));
@@ -38,7 +37,7 @@ const viewportConfig = { once: false, amount: 0.2 };
 const TiltCard = ParallaxCard;
 
 // Swipeable Partners Carousel
-function Marquee() {
+function Marquee({ items, direction = "left" }: { items: any[], direction?: "left" | "right" }) {
     const sliderRef = useRef<HTMLDivElement>(null);
     const x = useMotionValue(0);
     const [width, setWidth] = useState(0);
@@ -47,36 +46,37 @@ function Marquee() {
 
     useEffect(() => {
         if (sliderRef.current) {
-            // Calculate width of one set of items (half of total scrolling content)
-            // We have 3 sets. 0 to -33% is the first set? 
-            // Previous code had 4 sets. Let's stick to 4 sets for safety and seamless wrap.
-            // Width of 1 set is TotalWidth / 4 ? 
-            // The logic: We want to wrap when we've scrolled past the first "complete sequence".
-            // If we have 4 sets: [S1][S2][S3][S4].
-            // S1 matches S3? No, S1 matches S1.
-            // We move from 0. Wrap when we hit end of S1? 
-            // If we wrap at -S1_Width, we are at start of S2. S2 is identical to S1. So visually seamless.
-            // So we need width of S1.
-            // Total Scroll Width = 4 * S1_Width.
-            // Loop point = ScrollWidth / 4. 
-            // Measure:
             const totalWidth = sliderRef.current.scrollWidth;
-            const singleSetWidth = totalWidth / 3; // We are rendering 3 sets below
+            const singleSetWidth = totalWidth / 3;
             setWidth(singleSetWidth);
+            // If direction is right, start from -width so we can move right towards 0
+            if (direction === "right") {
+                x.set(-singleSetWidth);
+            } else {
+                x.set(0);
+            }
         }
-    }, []);
+    }, [items, direction]); // Re-run if items change
 
     useAnimationFrame((_, delta) => {
         if (!isDragging && !isHovered && width > 0) {
             const moveBy = (delta / 1000) * 50; // Speed: 50px per second
-            let newX = x.get() - moveBy;
+            let newX = x.get();
 
-            // Wrap logic: If we've scrolled past the first set, reset to 0
-            // Since we are moving negative:
-            if (newX <= -width) {
-                newX += width;
-            } else if (newX > 0) {
-                newX -= width;
+            if (direction === "left") {
+                newX -= moveBy;
+                // Wrap logic for Left: 0 -> -width
+                if (newX <= -width) {
+                    newX += width;
+                }
+            } else {
+                newX += moveBy;
+                // Wrap logic for Right: -width -> 0
+                // We typically scroll locally from -width to 0.
+                // If we go > 0, we jump back to -width.
+                if (newX >= 0) {
+                    newX -= width;
+                }
             }
 
             x.set(newX);
@@ -84,39 +84,35 @@ function Marquee() {
     });
 
     return (
-        <div className="relative overflow-hidden py-10 border-y border-white/5">
-            <div className="container mx-auto px-6 text-center mb-10">
-                <h3 className="text-3xl font-display font-bold text-white">Associate With</h3>
-                <p className="text-slate-400 mt-2">We believe every client is a valuable, long-term partner.</p>
-            </div>
-
-            <div
-                className="overflow-hidden cursor-grab active:cursor-grabbing px-6"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+        <div
+            className="overflow-hidden cursor-grab active:cursor-grabbing px-6 w-full" // Added w-full
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <motion.div
+                ref={sliderRef}
+                style={{ x }}
+                drag="x"
+                // Constraints depend on direction? 
+                // Simpler to just allow free drag and snap, but let's keep it robust.
+                // For Infinite loop, drag constraints are tricky. Let's just create a large scroll area.
+                // dragConstraints={{ right: 0, left: -(width * 2) }} 
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={() => setIsDragging(false)}
+                className="flex items-center gap-8 w-max"
             >
-                <motion.div
-                    ref={sliderRef}
-                    style={{ x }}
-                    drag="x"
-                    dragConstraints={{ right: 0, left: -(width * 2) }} // Allow dragging through 2 sets
-                    onDragStart={() => setIsDragging(true)}
-                    onDragEnd={() => setIsDragging(false)}
-                    className="flex items-center gap-8 w-max"
-                >
-                    {/* Render 3 copies for seamless looping */}
-                    {[...siteContent.partners, ...siteContent.partners, ...siteContent.partners].map((partner, i) => (
-                        <motion.div
-                            key={i}
-                            className="flex items-center justify-center bg-white rounded-lg overflow-hidden opacity-100 hover:scale-105 transition-all duration-300 shadow-lg min-w-[200px] h-[100px] pointer-events-none"
-                        >
-                            {partner.logo && (
-                                <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain p-4" />
-                            )}
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
+                {/* Render 3 copies for seamless looping */}
+                {[...items, ...items, ...items].map((partner, i) => (
+                    <motion.div
+                        key={i}
+                        className="flex items-center justify-center bg-white rounded-lg overflow-hidden opacity-100 shadow-lg min-w-[200px] h-[100px] pointer-events-none"
+                    >
+                        {partner.logo && (
+                            <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain p-1" />
+                        )}
+                    </motion.div>
+                ))}
+            </motion.div>
         </div>
     );
 }
@@ -262,8 +258,16 @@ export default function Home() {
             </Section3D>
 
             {/* --- PARTNERS MARQUEE --- */}
-            <section className="bg-slate-900/50 py-20">
-                <Marquee />
+            <section className="bg-slate-900/50 py-20 border-y border-white/5">
+                <div className="container mx-auto px-6 text-center mb-10">
+                    <h3 className="text-3xl font-display font-bold text-white">Associate With</h3>
+                    <p className="text-slate-400 mt-2">We believe every client is a valuable, long-term partner.</p>
+                </div>
+
+                <div className="flex flex-col gap-8">
+                    <Marquee items={siteContent.partners} direction="left" />
+                    <Marquee items={siteContent.partners2 || siteContent.partners} direction="right" />
+                </div>
             </section>
 
             {/* --- WHO WE ARE (Refined) --- */}
@@ -572,6 +576,7 @@ export default function Home() {
                                             </div>
                                         </Link>
                                     </SpotlightCard>
+                                </Suspense>
                             </motion.div>
                         ))}
                     </motion.div>
