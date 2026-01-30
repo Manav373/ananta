@@ -1,7 +1,8 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { siteContent } from '../data/content';
-import { Award, Linkedin, Mail, Calendar, Shield, Globe, Zap, Instagram } from 'lucide-react';
+import { Award, Linkedin, Mail, Calendar, Shield, Globe, Zap, Instagram, MapPin, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Staggered Blur Effect Variants
 const containerVariants: Variants = {
@@ -256,7 +257,43 @@ export default function About() {
                         </div>
                     </div>
                 </section>
+
+                {/* --- HEADQUARTERS SECTION (New) --- */}
+                <section className="py-24 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-blue-900/5" />
+                    <div className="container mx-auto px-6 relative z-10">
+                        <div className="max-w-4xl mx-auto bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-10 md:p-16 text-center shadow-2xl group hover:border-blue-500/30 transition-all duration-500">
+
+                            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8 group-hover:scale-110 transition-transform duration-300">
+                                <MapPin className="w-10 h-10 text-blue-400" />
+                            </div>
+
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">Our Headquarters</h2>
+
+                            <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                                {siteContent.brand.contact.address}
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                                <a
+                                    href={siteContent.brand.contact.mapLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-600/25 flex items-center gap-3 group/btn"
+                                >
+                                    Get Directions <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                                </a>
+                                <Link
+                                    to="/contact"
+                                    className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl font-bold transition-all flex items-center gap-3"
+                                >
+                                    Contact Us
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </div>
+        </div >
     );
 }

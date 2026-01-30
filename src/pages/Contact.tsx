@@ -129,6 +129,7 @@ export default function Contact() {
                             title="Visit Us"
                             label="Our Headquarters"
                             value={siteContent.brand.contact.address}
+                            href={siteContent.brand.contact.mapLink}
                             delay={0.5}
                             color="cyan"
                         />

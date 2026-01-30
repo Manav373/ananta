@@ -24,7 +24,8 @@ export const siteContent = {
         contact: {
             email: "bhavik@anantaaconsultancy.com",
             phone: "+91 94094 08199",
-            address: "India",
+            address: "5th Floor MV House, Bhadreshwar Society, Kazipur Dariyapur, Ahmedabad, Gujarat 380004",
+            mapLink: "https://www.google.com/maps/search/?api=1&query=MV+House,+Bhadreshwar+Society,+Kazipur+Dariyapur,+Ahmedabad,+Gujarat+380004",
         },
         socials: {
             instagram: "https://www.instagram.com/ananta_fintech/",

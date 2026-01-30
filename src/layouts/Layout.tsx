@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, Instagram, Facebook, Twitter, Linkedin, Mail, Phone } from 'lucide-react';
+import { Menu, X, ArrowRight, Instagram, Facebook, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteContent } from '../data/content';
 import CustomCursor from '../components/CustomCursor';
@@ -198,6 +198,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                     <div>
                                         <span className="block text-xs uppercase tracking-wider text-slate-400 mb-1">Phone</span>
                                         <span className="text-white">{siteContent.brand.contact.phone}</span>
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-4 group">
+                                    <a
+                                        href={siteContent.brand.contact.mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0"
+                                    >
+                                        <MapPin className="w-5 h-5" />
+                                    </a>
+                                    <div>
+                                        <span className="block text-xs uppercase tracking-wider text-slate-400 mb-1">Visit Us</span>
+                                        <a
+                                            href={siteContent.brand.contact.mapLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-white hover:text-primary-glow transition-colors text-sm leading-relaxed"
+                                        >
+                                            {siteContent.brand.contact.address}
+                                        </a>
                                     </div>
                                 </li>
                             </ul>
