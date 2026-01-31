@@ -15,12 +15,14 @@ import chatGpt3 from '../assets/ChatGPT Image Jan 30, 2026, 06_53_47 PM.png';
 import img8841 from '../assets/8841736417359.webp';
 import img5471 from '../assets/547167564_1416642487134167_7354644739899953435_n.jpg';
 import img21 from '../assets/21.png';
+import heroBg from '../assets/hero-background.jpg';
+import founderImg from '../assets/founder-bhavik.jpg';
 
 export const siteContent = {
     brand: {
         name: "Ananta Fintech Services",
         tagline: "Guiding You Towards Unprecedented Success with Proven Strategies",
-        logo: "/logo.svg",
+        logo: "/logo.png",
         contact: {
             email: "bhavik@anantaaconsultancy.com",
             phone: "+91 94094 08199",
@@ -37,7 +39,7 @@ export const siteContent = {
     hero: {
         title: "Financial Infrastructure for the Digital Age",
         subtitle: "We architect the bridges between traditional banking and the next billion users through cutting-edge KIOSK technology and strategic fintech consulting.",
-        bgImage: "https://static.wixstatic.com/media/c837a6_4380b6050e044e0b8eed12077cc1f883f000.jpg",
+        bgImage: heroBg,
         cta: "Explore Our Solutions",
     },
     partners: [
@@ -66,12 +68,12 @@ export const siteContent = {
         header: "Welcome to Ananta Fintech Services — where innovation meets excellence.",
         description: "Founded in 2024, Ananta Fintech Services is a dedicated team of professionals delivering exceptional banking and financial services that truly make a difference. With a strong focus on quality, innovation, and client satisfaction, we craft tailored solutions that not only meet your business needs but consistently exceed expectations.",
         description2: "At Ananta Fintech Services, we believe in building enduring partnerships through trust, transparency, and unmatched service excellence. Whether you're engaging with us for the first time or are a long-standing client, our commitment remains the same: to help you succeed.",
-        image: "https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg",
+        image: founderImg,
         founder: {
             name: "Bhavik Panchal",
             role: "Founder & CEO",
             bio: "As the Founder of Ananta Fintech Services, I lead the company's vision, partnerships, and growth strategy while ensuring transparent and compliant fintech distribution through authorized platforms.",
-            image: "https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg",
+            image: founderImg,
             socials: {
                 linkedin: "https://www.linkedin.com/in/bhavik-panchal-b04a2b219/",
                 twitter: "#",
@@ -90,7 +92,8 @@ export const siteContent = {
         { name: "Payment Gateway Services", image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=2070&fm=webp&fit=crop" },
         { name: "Finance & Loan Services", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2070&fm=webp&fit=crop" },
         { name: "Domestic Money Transfer", image: "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?q=80&w=2070&fm=webp&fit=crop" },
-        { name: "New ATM Installation", image: "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?q=80&w=2070&fm=webp&fit=crop" }
+        { name: "New ATM Installation", image: "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?q=80&w=2070&fm=webp&fit=crop" },
+        { name: "Insurance Services", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&fm=webp&fit=crop" }
     ],
     process: [
         {

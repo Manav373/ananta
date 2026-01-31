@@ -6,31 +6,18 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.anantaaconsultancy.com/logo.svg</image:loc>
+      <image:loc>https://www.anantaaconsultancy.com/logo.png</image:loc>
       <image:title>Ananta Fintech Services</image:title>
       <image:caption>Ananta Fintech Services Logo</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://static.wixstatic.com/media/c837a6_4380b6050e044e0b8eed12077cc1f883f000.jpg</image:loc>
-      <image:title>Financial Infrastructure</image:title>
-      <image:caption>Ananta Fintech Services Hero Background</image:caption>
-    </image:image>
+
   </url>
   <url>
     <loc>https://www.anantaaconsultancy.com/about</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg</image:loc>
-      <image:title>About Ananta Fintech Services</image:title>
-      <image:caption>Ananta Fintech Services Office &amp; Team</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://static.wixstatic.com/media/9eb0df_3d59b267f888487e8f5f30ba98565505~mv2.jpeg</image:loc>
-      <image:title>Bhavik Panchal - Founder &amp; CEO</image:title>
-      <image:caption>Leadership at Ananta Fintech Services</image:caption>
-    </image:image>
+
   </url>
   <url>
     <loc>https://www.anantaaconsultancy.com/solutions</loc>
