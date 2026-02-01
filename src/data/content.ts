@@ -33,7 +33,7 @@ export const siteContent = {
             instagram: "https://www.instagram.com/ananta_fintech/",
             facebook: "https://www.facebook.com/people/Ananta-Consultancy/61579297447711/",
             twitter: "https://twitter.com",
-            linkedin: "https://linkedin.com",
+            linkedin: "https://www.linkedin.com/in/ananta-fintech-services-7158403a9/",
         }
     },
     hero: {
